@@ -141,7 +141,6 @@ namespace sico {
             this.vuePrivate = new Vue(this.options);
         }
 
-
         /**
          * Send a GET request to given URL
          * @param {string} action - Overwrite transaction action name. If action is set to 'hide' no notification will be emitted.
@@ -267,7 +266,7 @@ namespace sico {
             }
 
             if (data != null && data.Data != null) {
-                Vue.$set(this.vue, "Data", data.Data);
+                this.vue.$set(this.vue, "Data", data.Data);
                 sico.Transaction.$notifyNow("Revert", 1, "Reverted data to initial state");
             }
         }
@@ -280,7 +279,7 @@ namespace sico {
          */
         public $data(data: any, callback?: FunctionCallback, skipTransaction?: boolean) {
             if (data != null) {
-                Vue.$set(this.vue, "Data", data);
+                this.vue.$set(this.vue, "Data", data);
 
                 if (callback && typeof callback === "function") {
                     callback(data);
@@ -372,9 +371,9 @@ namespace sico {
                         response.Code = 1;
                     }
 
-                    Vue.$set($this.vue, "Action", response.Action);
-                    Vue.$set($this.vue, "Code", response.Code);
-                    Vue.$set($this.vue, "Message", response.Message);
+                    $this.vue.$set($this.vue, "Action", response.Action);
+                    $this.vue.$set($this.vue, "Code", response.Code);
+                    $this.vue.$set($this.vue, "Message", response.Message);
                     if (options.setData && response.Code < 2) {
                         // Get path
                         let path = options.path;
@@ -384,7 +383,7 @@ namespace sico {
                         }
 
                         if (path == null || path === "" || path === "undefined") {
-                            Vue.$set($this.vue, "Data", response.Data);
+                            $this.vue.$set($this.vue, "Data", response.Data);
                         } else {
                             const cmd = "$this.vue.$data." + path + " = response.Data;";
                             // tslint:disable-next-line:no-eval
