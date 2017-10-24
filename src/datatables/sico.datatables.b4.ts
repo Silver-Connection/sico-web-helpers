@@ -1,7 +1,7 @@
 ﻿/**
  * @summary     DataTables Bootstrap 4 helper
  * @description Converts Paging and search to work with bootstrap
- * @version     2.0
+ * @version     2.1
  * @file        dataTables.bootstrap.js
  * @author      Silver Connection OHG
  * @contact     Kiarash G. <kiarash@si-co.net>
