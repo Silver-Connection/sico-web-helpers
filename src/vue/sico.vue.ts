@@ -82,12 +82,12 @@ namespace sico {
             put: null,
         };
 
-        private vuewPrivate: vuejs.Vue = null;
+        private vuePrivate: vuejs.Vue = null;
         get vue(): vuejs.Vue {
-            return this.vuewPrivate;
+            return this.vuePrivate;
         }
         set vue(model: vuejs.Vue) {
-            this.vuewPrivate = model;
+            this.vuePrivate = model;
         }
 
         private storePrivate: any = null;
@@ -138,7 +138,7 @@ namespace sico {
                 this.options.path = null;
             }
 
-            this.vuewPrivate = new Vue(this.options);
+            this.vuePrivate = new Vue(this.options);
         }
 
 
@@ -149,7 +149,7 @@ namespace sico {
          * @param {string} path - Path in Vue data to use for this request. Used for partial update.
          */
         public $get(action: string = null, callback: FunctionCallback = null, path: string = null): void {
-            if (this.options == null || this.options.get == null || this.vuewPrivate == null) {
+            if (this.options == null || this.options.get == null || this.vuePrivate == null) {
                 return;
             }
 
@@ -176,7 +176,7 @@ namespace sico {
          * @param {string} path - Path in Vue data to use for this request. Used for partial update.
          */
         public $post(callback: FunctionCallback = null, path: string = null): void {
-            if (this.options == null || this.options.post == null || this.vuewPrivate == null) {
+            if (this.options == null || this.options.post == null || this.vuePrivate == null) {
                 return;
             }
 
@@ -203,7 +203,7 @@ namespace sico {
          * @param {string} path - Path in Vue data to use for this request. Used for partial update.
          */
         public $put(callback: FunctionCallback = null, path: string = null): void {
-            if (this.options == null || this.options.put == null || this.vuewPrivate == null) {
+            if (this.options == null || this.options.put == null || this.vuePrivate == null) {
                 return;
             }
 
@@ -229,7 +229,7 @@ namespace sico {
          * @param {Function} callback - Callback function with respond data as parameter
          */
         public $delete(callback: FunctionCallback = null, path: string = null): void {
-            if (this.options == null || this.options.delete == null || this.vuewPrivate == null) {
+            if (this.options == null || this.options.delete == null || this.vuePrivate == null) {
                 return;
             }
 
@@ -254,7 +254,7 @@ namespace sico {
          * Revert data to initial state
          */
         public $revert(): void {
-            if (this.options == null || this.options.data == null || this.vuewPrivate == null) {
+            if (this.options == null || this.options.data == null || this.vuePrivate == null) {
                 return;
             }
 

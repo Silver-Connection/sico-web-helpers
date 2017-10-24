@@ -15,9 +15,9 @@ This is set of common script and styles used for front-end web development.
 
 Please have look at the [DataTables](https://datatables.net/) official project website. Currently we fully support this extensions, other may need some tweaking to fit to the Bootstrap 4 theme.
 
-Tweaks and improvments:
+Tweaks and improvements:
 
-* Full Bootstrap 4 integration (themeing, pagination, buttons)
+* Full Bootstrap 4 integration (theming, pagination, buttons)
 * Fixed Header works with tabs and fixed navigation bars
 * Support for header templates in print view
 * Add swap selected rows button
@@ -31,9 +31,9 @@ Tweaks and improvments:
 
 Please have look at the [Dropzone.js](http://www.dropzonejs.com/) official project website.
 
-Tweaks and improvments:
+Tweaks and improvements:
 
-* Better Bootstrap 4 integration (themeing)
+* Better Bootstrap 4 integration (theming)
 
 > **Documentation**
 >

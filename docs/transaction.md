@@ -99,7 +99,7 @@ var vue_images = new sico.VueHelper({
 
 | Method | Return | Description |
 |-|-|-|
-|$isTransaction(data: object)| boolean | Check if given object matchs TransactionModel interface |
+|$isTransaction(data: object)| boolean | Check if given object matches TransactionModel interface |
 |$noify(model: TransactionModel)| void | Generate notification based on TransactionModel |
 |$notifyNow(action: string, code: number, message: string)| void | Generate notification. Code: 0 -> Info, 1 -> Success, 2 -> Error |
 

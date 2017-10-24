@@ -10,9 +10,9 @@ Dropzone.js
 
 Please have look at the [Dropzone.js](http://www.dropzonejs.com/) official project website.
 
-Tweaks and improvments:
+Tweaks and improvements:
 
-* Better Bootstrap 4 integration (themeing)
+* Better Bootstrap 4 integration (theming)
 
 ## Installation
 
@@ -70,7 +70,7 @@ Dropzone.options.dropzoneImage = {
 
 ## API
 
-We also have added some static methods for common tasks and UI controle.
+We also have added some static methods for common tasks and UI controls.
 
 ```javascript
 

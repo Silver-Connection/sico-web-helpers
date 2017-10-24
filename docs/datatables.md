@@ -6,16 +6,16 @@ DataTables
     - [```sico.datatables.b4.js```](#sicodatatablesb4js)
     - [```sico.datatables.js```](#sicodatatablesjs)
 - [Usage](#usage)
-- [Configuartion](#configuartion)
+- [Configuration](#configuration)
 - [API](#api)
 
 <!-- /TOC -->
 
 Please have look at the [DataTables](https://datatables.net/) official project website. Currently we fully support this extensions, other may need some tweaking to fit to the Bootstrap 4 theme.
 
-Tweaks and improvments:
+Tweaks and improvements:
 
-* Full Bootstrap 4 integration (themeing, pagination, buttons)
+* Full Bootstrap 4 integration (theming, pagination, buttons)
 * Fixed Header works with tabs and fixed navigation bars
 * Support for header templates in print view
 * Add swap selected rows button
@@ -61,11 +61,11 @@ If you want to use a print template, add this to your page:
 
 ### ```sico.datatables.b4.js```
 
-Changes datatable theme to fit Bootstrap 4. This includes settings fot pagination, filter and buttons. Please also include the stylings in your page.
+Changes datatable theme to fit Bootstrap 4. This includes settings for pagination, filter and buttons. Please also include the stylings in your page.
 
 ### ```sico.datatables.js```
 
-This is helper wrapper for DataTables which fixes some problems and also adds some improvments for easier usage. 
+This is helper wrapper for DataTables which fixes some problems and also adds some improvements for easier usage. 
 
 ## Usage
 
@@ -98,9 +98,9 @@ var dt = new sico.DataTablesHelper(dt_config);
 
 ```
 
-## Configuartion
+## Configuration
 
-The wrapper and datatables use the same configuartion object. We have just extended it with the following top level options.
+The wrapper and datatables use the same configuration object. We have just extended it with the following top level options.
 
 | Option | Type | Description |
 |-|-|-|
