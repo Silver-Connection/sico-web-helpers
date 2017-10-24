@@ -13,7 +13,7 @@ var sico;
                 post: null,
                 put: null,
             };
-            this.vuewPrivate = null;
+            this.vuePrivate = null;
             this.storePrivate = null;
             if (typeof jQuery === "undefined") {
                 opt = _.defaults(this.default, opt);
@@ -35,14 +35,14 @@ var sico;
             if (this.options.path == null || this.options.path === "" || this.options.path === "undefined") {
                 this.options.path = null;
             }
-            this.vuewPrivate = new Vue(this.options);
+            this.vuePrivate = new Vue(this.options);
         }
         Object.defineProperty(VueHelper.prototype, "vue", {
             get: function () {
-                return this.vuewPrivate;
+                return this.vuePrivate;
             },
             set: function (model) {
-                this.vuewPrivate = model;
+                this.vuePrivate = model;
             },
             enumerable: true,
             configurable: true
@@ -68,7 +68,7 @@ var sico;
             if (action === void 0) { action = null; }
             if (callback === void 0) { callback = null; }
             if (path === void 0) { path = null; }
-            if (this.options == null || this.options.get == null || this.vuewPrivate == null) {
+            if (this.options == null || this.options.get == null || this.vuePrivate == null) {
                 return;
             }
             this._ajax({
@@ -86,7 +86,7 @@ var sico;
         VueHelper.prototype.$post = function (callback, path) {
             if (callback === void 0) { callback = null; }
             if (path === void 0) { path = null; }
-            if (this.options == null || this.options.post == null || this.vuewPrivate == null) {
+            if (this.options == null || this.options.post == null || this.vuePrivate == null) {
                 return;
             }
             this._ajax({
@@ -105,7 +105,7 @@ var sico;
         VueHelper.prototype.$put = function (callback, path) {
             if (callback === void 0) { callback = null; }
             if (path === void 0) { path = null; }
-            if (this.options == null || this.options.put == null || this.vuewPrivate == null) {
+            if (this.options == null || this.options.put == null || this.vuePrivate == null) {
                 return;
             }
             this._ajax({
@@ -124,7 +124,7 @@ var sico;
         VueHelper.prototype.$delete = function (callback, path) {
             if (callback === void 0) { callback = null; }
             if (path === void 0) { path = null; }
-            if (this.options == null || this.options.delete == null || this.vuewPrivate == null) {
+            if (this.options == null || this.options.delete == null || this.vuePrivate == null) {
                 return;
             }
             this._ajax({
@@ -140,7 +140,7 @@ var sico;
             }, callback);
         };
         VueHelper.prototype.$revert = function () {
-            if (this.options == null || this.options.data == null || this.vuewPrivate == null) {
+            if (this.options == null || this.options.data == null || this.vuePrivate == null) {
                 return;
             }
             var data = null;

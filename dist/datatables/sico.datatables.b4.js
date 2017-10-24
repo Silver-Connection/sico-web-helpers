@@ -138,7 +138,7 @@ if (typeof $.fn.dataTable === "function" &&
         sWrapper: "dataTables_wrapper dt-bootstrap4",
         sFilterInput: "form-control",
         sLength: "dataTables_length",
-        sLengthSelect: "form-control custom-select",
+        sLengthSelect: "form-control",
         sProcessing: "dataTables_processing panel panel-default",
         sPaging: "dataTables_paginate pull-right page_",
         sPageButton: "paginate_button page-item",
