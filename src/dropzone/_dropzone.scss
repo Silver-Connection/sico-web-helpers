@@ -68,6 +68,7 @@ $dz-content-bg: $gray-300 !default;
     @include media-breakpoint-up(sm) {
         flex-wrap: nowrap;
         flex-direction: row;
+        min-height: $dz-preview-size;
         .image-box,
         .content-box {
             width: 50%;
