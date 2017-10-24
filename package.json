@@ -1,14 +1,14 @@
 {
   "name": "sico-common-web",
-  "version": "1.0.0",
-  "description": "Tools and wrappers for common javascript tools used for brwoser and front-end development",
+  "version": "1.0.1",
+  "description": "Tools and wrappers for common javascript tools used for browser and front-end development",
   "author": "Silver Connection",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Silver-Connection/sico-web-helpers/issues"
   },
   "keywords": [
-    "boostrap4",
+    "bootstrap4",
     "datatables",
     "dropzone",
     "vue"
@@ -16,11 +16,13 @@
   "private": false,
   "typings": "types/index.d.ts",
   "files": [
+    "docs",
     "src",
     "dist/*/*.js",
     "dist/*/*.css",
     "dist/*/*._scss",
-    "types/*.d.ts"
+    "types/*.d.ts",
+    "index.html"
   ],
   "repository": {
     "type": "git",
