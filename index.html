@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="node_modules/datatables.net/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="node_modules/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="node_modules/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <script type="text/javascript" src="node_modules/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="node_modules/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script type="text/javascript" src="node_modules/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script type="text/javascript" src="node_modules/datatables.net-select/js/dataTables.select.min.js"></script>
+    <script type="text/javascript" src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" type="text/css" href="src/bootstrap/bootstrap-extra.css" />
+
+    <!-- Transaction -->
+    <script type="text/javascript" src="node_modules/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="src/transaction/sico.transaction.js"></script>
+    <script type="text/javascript" src="src/samples/transaction.js"></script>
+
+    <!-- Vue -->
+    <script type="text/javascript" src="src/vue/sico.vue.js"></script>
+
+    <!-- Datatables -->
+    <link rel="stylesheet" type="text/css" href="src/datatables/datatables-style.css" />
+    <script type="text/javascript" src="src/datatables/sico.datatables.b4.js"></script>
+    <script type="text/javascript" src="src/datatables/sico.datatables.js"></script>
+    <script type="text/javascript" src="src/samples/table.js"></script>
+
+    <!-- Dropzone -->
+    <link rel="stylesheet" type="text/css" href="src/dropzone/dropzone-style.css" />
+    <script type="text/javascript" src="node_modules/dropzone/dist/min/dropzone.min.js"></script>
+    <script type="text/javascript" src="src/dropzone/sico.dropzone.js"></script>
+    <script type="text/javascript" src="src/samples/dropzone.js"></script>
+
+    <title>Samples</title>
+</head>
+
+<body>
+    <nav class="navbar fixed-top navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="#">Samples</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <nav class="nav navbar-nav mr-auto">
+                <a class="nav-item nav-link active" data-toggle="tab" href="#tab-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#tab-table" role="tab" aria-controls="nav-profile" aria-selected="false">DataTables</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#tab-dropzone" role="tab" aria-controls="nav-contact" aria-selected="false">Dropzone.js</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#tab-maps" role="tab" aria-controls="nav-contact" aria-selected="false">Google Mpas</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#tab-transaction" role="tab" aria-controls="nav-contact" aria-selected="false">Transaction</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#tab-vue" role="tab" aria-controls="nav-contact" aria-selected="false">Vue</a>
+            </nav>
+        </div>
+    </nav>
+    <div class="container-fluid" style="margin-top: 70px;">
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="tab-home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-3">Samples & Code</h1>
+                        <p class="lead">Try it out!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab-table" role="tabpanel" aria-labelledby="datatable-tab">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>DataTables</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-striped table-bordered table-sm" id="dt-test">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>#</th>
+                                    <th>Type</th>
+                                    <th>Database</th>
+                                    <th>User</th>
+                                    <th>Address</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab-dropzone" role="tabpanel" aria-labelledby="dropzone-tab">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>Dropzone.js</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <a class="btn btn-outline-success edit pull-right" href="javascript: sico.DropzoneHelper.$uploadShow('#dropzoneImageEdit');" id="btn-add-image">
+                            <i class="fa fa-plus"></i> Add Image
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <form action="#" method="post" class="dropzone fade d-none" id="dropzoneImageEdit">
+                            <div class="image-block mb-4" id="image_0">
+                                <div class="image-box">
+                                    <img alt="Image" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2264%22%20height%3D%2264%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15f39e9b84e%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15f39e9b84e%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2213.84375%22%20y%3D%2236.5%22%3E64x64%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E">
+                                </div>
+                                <div class="content-box">
+                                    <div class="item">
+                                        <div class="form-group">
+                                            <small class="d-block">Type</small>
+                                            <span>Image</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <small class="d-block">Notes</small>
+                                                <textarea class="form-control" id="img_notes" rows="3" name="model.Notes"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fallback">
+                                <input type="file" id="model.File" name="model.File" multiple>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="image-block" v-for="item in Data.Images" :id="'image_' + item.Id" :key="item.Id">
+                            <div class="image-box">
+                                <img :alt="item.Name" :src="item.Link" :onclick="'sico.DropzoneHelper.$modalShow(\'' + item.Link + '\', \'' + item.Name + '\');'">
+                            </div>
+                            <div class="content-box">
+                                <div class="row text-shift-down">
+                                    <div class="col-6 col-sm-6">
+                                        <small class="d-block">Type</small>
+                                        <p v-text="item.Type"></p>
+                                    </div>
+                                    <div class="col-6 col-sm-6">
+                                        <small class="d-block">Filename</small>
+                                        <p v-text="item.Name"></p>
+                                    </div>
+                                    <div class="col-6 col-sm-6">
+                                        <small class="d-block">Created by</small>
+                                        <p v-text="item.CreatedBy"></p>
+                                    </div>
+                                    <div class="col-6 col-sm-6">
+                                        <small class="d-block">Date</small>
+                                        <p v-text="item.Created"></p>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <small class="d-block">Notes</small>
+                                    <p v-text="item.Notes"></p>
+                                </div>
+                                <div class="item-flex">
+                                    <button role="button" class="btn btn-controle" :onclick="editLink(item.Id)">
+                                        <i class="fa fa-pencil nopad"></i>
+                                    </button>
+                                    <button role="button" class="btn btn-controle btn-right btn-hover-danger" :onclick="'sico.DropzoneHelper.$deleteOverlayShow(' + item.Id + ');'">
+                                        <i class="fa fa-trash-o nopad"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="overlay-content">
+                                <h2>Delete this Image?</h2>
+                                <button class="btn btn-link btn-lg btn-hover-success btn-ok" role="button" :onclick="'imageDelete(' + item.Id + ');'">
+                                    <i class="fa fa-check-circle-o nopad"></i>
+                                </button>
+                                <button class="btn btn-link btn-lg btn-hover-danger btn-cancel" role="button" :onclick="'sico.DropzoneHelper.$deleteOverlayHide(' + item.Id + ');'">
+                                    <i class="fa fa-times-circle-o nopad"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab-transaction" role="tabpanel" aria-labelledby="transaction-tab">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>Transaction Model</h1>
+                        <p class="mt-4">
+                            The <i>Transaction</i> class is a set of tools for dealing with server response which match the <i>TransactionModel</i> interface.
+                        </p>
+                        <p>
+                            The actual data is wrapped which make life with Vue.js better, because we can update our data as we like.
+                        </p>
+                        <pre>
+interface TransactionModel {
+    /**
+     * Transaction action name
+     * @default null
+     * @type string
+     */
+    Action: string,
+
+    /**
+     * Transaction return code
+     * @default null
+     * @type string
+     */
+    Code: number,
+
+    /**
+     * Actual data
+     * @default null
+     * @type string
+     */
+    Data: any,
+
+    /**
+     * Transaction message
+     * @default null
+     * @type string
+     */
+    Message: string
+}
+                        </pre>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <h1>Notify Helper</h1>
+                        <p class="mt-4">
+                            Generate notification
+                        </p>
+                        <button class="btn btn-outline-info" onclick="notifyInfo()">Info</button>
+                        <button class="btn btn-outline-success" onclick="notifySuccess()">Success</button>
+                        <button class="btn btn-outline-danger" onclick="notifyError()">Error</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script id="datatables-print" type="text/template">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-title">
+                    Print Sample
+                    <span class="pull-right">
+                        <img src="https://si-co.net/content/images/logo-top.png" alt="Logo">
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/javascript">
+        //<![CDATA[
+        $(document).ready(function() {
+            //testDataTableRaw("#dt-test")
+            testDataTableHelper("#dt-test");
+        });
+
+        function getInterface(object) {
+            var content = "";
+            for (var property in object) {
+                if (object.hasOwnProperty(property)) {
+                    var hasDefault = false;
+                    if (object[property] != null && object[property] != "") {
+                        content += "/**<br/>";
+                        content += " * Default Value: <br/>";
+                        content += " * " + object[property] + " <br/>";
+                        content += " */<br/>";
+                        hasDefault = true;
+                    }
+                    content += property + "?: " + typeof(property) + "; <br/>";
+                    if (hasDefault) {
+                        content += "<br/>";
+                    }
+                }
+            }
+            $("#interface").html(content);
+        }
+
+        //]]>
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+{
+  "name": "sico-common-web",
+  "version": "1.0.0",
+  "description": "Tools and wrappers for common javascript tools used for brwoser and front-end development",
+  "author": "Silver Connection",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Silver-Connection/sico-web-helpers/issues"
+  },
+  "keywords": [
+    "boostrap4",
+    "datatables",
+    "dropzone",
+    "vue"
+  ],
+  "private": false,
+  "typings": "types/index.d.ts",
+  "files": [
+    "src",
+    "dist/*/*.js",
+    "dist/*/*.css",
+    "dist/*/*._scss",
+    "types/*.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://https://github.com/Silver-Connection/sico-web-helpers.git"
+  },
+  "dependencies": {
+    "@types/bootstrap": "^3.3.36",
+    "@types/bootstrap-notify": "^3.1.32",
+    "@types/datatables.net": "^1.10.6",
+    "@types/datatables.net-buttons": "^1.1.4",
+    "@types/datatables.net-fixedheader": "^3.1.2",
+    "@types/datatables.net-select": "^1.2.2",
+    "@types/googlemaps": "^3.29.2",
+    "@types/jquery": "^3.2.15",
+    "@types/underscore": "^1.8.3",
+    "bootstrap": "4.0.0-beta",
+    "bootstrap-notify": "^3.1.3",
+    "datatables.net": "^1.10.16",
+    "datatables.net-buttons": "^1.4.2",
+    "datatables.net-fixedheader": "^3.1.3",
+    "datatables.net-select": "^1.2.3",
+    "dropzone": "^5.2.0",
+    "dts-generator": "^2.1.0",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1",
+    "jquery-validation": "^1.17.0",
+    "popper.js": "^1.12.5",
+    "tslint": "^5.8.0",
+    "vee-validate": "^2.0.0-rc.19",
+    "vue": "^2.5.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.1.5",
+    "cssnano": "^3.10.0",
+    "grunt": "^1.0.1",
+    "grunt-browser-sync": "^2.2.0",
+    "grunt-cli": "^1.2.0",
+    "grunt-concurrent": "^2.3.1",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-exec": "^3.0.0",
+    "grunt-mkdir": "^1.0.0",
+    "grunt-postcss": "^0.9.0",
+    "grunt-ts": "^6.0.0-beta.16",
+    "jit-grunt": "^0.10.0",
+    "pixrem": "^4.0.1",
+    "time-grunt": "^1.4.0",
+    "typescript": "^2.5.2"
+  },
+  "engines": {
+    "yarn": ">= 1.0.0"
+  }
+}
