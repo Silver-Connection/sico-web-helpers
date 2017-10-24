@@ -151,13 +151,13 @@ var sico;
                 data = this.options.data;
             }
             if (data != null && data.Data != null) {
-                Vue.$set(this.vue, "Data", data.Data);
+                this.vue.$set(this.vue, "Data", data.Data);
                 sico.Transaction.$notifyNow("Revert", 1, "Reverted data to initial state");
             }
         };
         VueHelper.prototype.$data = function (data, callback, skipTransaction) {
             if (data != null) {
-                Vue.$set(this.vue, "Data", data);
+                this.vue.$set(this.vue, "Data", data);
                 if (callback && typeof callback === "function") {
                     callback(data);
                 }
@@ -232,9 +232,9 @@ var sico;
                     response = new sico.Transaction(response);
                     response.Code = 1;
                 }
-                Vue.$set($this.vue, "Action", response.Action);
-                Vue.$set($this.vue, "Code", response.Code);
-                Vue.$set($this.vue, "Message", response.Message);
+                $this.vue.$set($this.vue, "Action", response.Action);
+                $this.vue.$set($this.vue, "Code", response.Code);
+                $this.vue.$set($this.vue, "Message", response.Message);
                 if (options.setData && response.Code < 2) {
                     var path = options.path;
                     if ((path == null || path === "" || path === "undefined")
@@ -242,7 +242,7 @@ var sico;
                         path = $this.options.path;
                     }
                     if (path == null || path === "" || path === "undefined") {
-                        Vue.$set($this.vue, "Data", response.Data);
+                        $this.vue.$set($this.vue, "Data", response.Data);
                     }
                     else {
                         var cmd = "$this.vue.$data." + path + " = response.Data;";

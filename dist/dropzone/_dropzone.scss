@@ -1,4 +1,5 @@
 $dz-preview-size: 350px !default;
+$dz-preview-size-max: 500px !default;
 $dz-body-bg: #fff !default;
 $dz-body-border: $gray-400 !default;
 $dz-content-bg: $gray-300 !default;
@@ -18,6 +19,7 @@ $dz-content-bg: $gray-300 !default;
         display: flex;
         width: 100%;
         min-height: $dz-preview-size;
+        max-height: calc($dz-preview-size-max * 0.8);
         flex-grow: 0;
         margin: 0;
         text-align: center;
@@ -68,6 +70,8 @@ $dz-content-bg: $gray-300 !default;
     @include media-breakpoint-up(sm) {
         flex-wrap: nowrap;
         flex-direction: row;
+        min-height: $dz-preview-size;
+        max-height: $dz-preview-size-max;
         .image-box,
         .content-box {
             width: 50%;
