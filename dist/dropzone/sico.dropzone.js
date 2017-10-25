@@ -4,7 +4,8 @@ var sico;
     var DropzoneHelper = (function () {
         function DropzoneHelper() {
         }
-        DropzoneHelper.$image = function (modelUpdate) {
+        DropzoneHelper.$image = function (modelUpdate, hideForm) {
+            if (hideForm === void 0) { hideForm = true; }
             Dropzone.options.dropzoneImageEdit = {
                 paramName: "model.File",
                 maxFilesize: 3,
@@ -20,7 +21,9 @@ var sico;
                         sico.Transaction.$noify(respond);
                         if (respond.Code === 1) {
                             $(".dz-preview.dz-success").remove();
-                            $("#dropzoneImageEdit").addClass("hidden");
+                            if (hideForm) {
+                                $("#dropzoneImageEdit").addClass("hidden");
+                            }
                             modelUpdate(respond);
                         }
                     });

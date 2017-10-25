@@ -5,6 +5,12 @@ Dropzone.js
 - [Installation](#installation)
 - [Usage](#usage)
 - [API](#api)
+    - [$image](#image)
+    - [$uploadShow](#uploadshow)
+    - [$deleteOverlayShow](#deleteoverlayshow)
+    - [$deleteOverlayHide](#deleteoverlayhide)
+    - [$modalShow](#modalshow)
+- [Styling](#styling)
 
 <!-- /TOC -->
 
@@ -41,7 +47,7 @@ sico.DropzoneHelper.$image((respond: sico.TransactionModel) => {
 
 // above call will turn in:
 
-// Dropzone Global Configuartion
+// Dropzone Global Configuration
 Dropzone.options.dropzoneImage = {
     paramName: "value",
     maxFilesize: 3,
@@ -72,19 +78,83 @@ Dropzone.options.dropzoneImage = {
 
 We also have added some static methods for common tasks and UI controls.
 
-```javascript
+### $image
 
+Load image preset configuration and set callback function for dropzone.js
+
+```javascript
 // Load preset and set callback
 sico.DropzoneHelper.$image((respond: sico.TransactionModel) => {
     vue_images.vue.$data.Data.Images.push(respond.Data);
-});
-
+}, false);
 ```
 
-| Method | Return | Description |
+**Parameter**
+
+| Parameter | Type | Description |
 |-|-|-|
-|$image(callback: (data: any) => void))| void | This will load a preset as shown and set a callback function. |
-|$uploadShow(el: string \| HTMLElement)| void | Show upload form |
-|$deleteOverlayShow(id: number)| void | Show delete overlay for given id, which will turn in ```#image_id``` |
-|$deleteOverlayHide(id: number) | void | Hide delete overlay |
-|$modalShow(id: number) | void | Show modal with selected image in full screen |
+|callback| function (data:any) => void | Sets callback functions for dropzone ```this.on("success", (file, respond) => void)```|
+|hideForm (optional)| boolean (default: true) | Hide upload form after upload |
+
+### $uploadShow
+
+Show upload form
+
+```javascript
+sico.DropzoneHelper.$image("#id");
+sico.DropzoneHelper.$image($("#id"));
+```
+
+**Parameter**
+
+| Parameter | Type | Description |
+|-|-|-|
+|element| string \| HTMLElement | Upload form |
+
+### $deleteOverlayShow
+
+Show delete overlay
+
+```javascript
+sico.DropzoneHelper.$deleteOverlayShow(5);
+```
+
+**Parameter**
+
+| Parameter | Type | Description |
+|-|-|-|
+|id| number | File Id, access element by ```#image_id``` |
+
+
+### $deleteOverlayHide
+
+Hide delete overlay
+
+```javascript
+sico.DropzoneHelper.$deleteOverlayHide(5);
+```
+
+**Parameter**
+
+| Parameter | Type | Description |
+|-|-|-|
+|id| number | File Id, access element by ```#image_id``` |
+
+### $modalShow
+
+Open modal with image in full-screen
+
+```javascript
+sico.DropzoneHelper.$modalShow(5);
+```
+
+**Parameter**
+
+| Parameter | Type | Description |
+|-|-|-|
+|id| number | File Id, access element by ```#image_id``` |
+
+
+## Styling
+
+You set some scss variables to customize the UI. Have look at ```_dropzone.scc``` file.

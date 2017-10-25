@@ -77,7 +77,7 @@ namespace sico {
         /**
          * Initialize image upload config
          */
-        public static $image(modelUpdate: (data: any) => void) {
+        public static $image(modelUpdate: (data: any) => void, hideForm: boolean = true) {
             Dropzone.options.dropzoneImageEdit = {
                 paramName: "model.File",
                 maxFilesize: 3,
@@ -94,7 +94,9 @@ namespace sico {
 
                         if (respond.Code === 1) {
                             $(".dz-preview.dz-success").remove();
-                            $("#dropzoneImageEdit").addClass("hidden");
+                            if (hideForm) {
+                                $("#dropzoneImageEdit").addClass("hidden");
+                            }
                             modelUpdate(respond);
                         }
                     });
