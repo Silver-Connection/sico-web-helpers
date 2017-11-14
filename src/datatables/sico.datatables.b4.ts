@@ -1,7 +1,7 @@
 ﻿/**
  * @summary     DataTables Bootstrap 4 helper
  * @description Converts Paging and search to work with bootstrap
- * @version     2.1
+ * @version     2.2
  * @file        dataTables.bootstrap.js
  * @author      Silver Connection OHG
  * @contact     Kiarash G. <kiarash@si-co.net>
@@ -105,7 +105,7 @@ namespace sico {
                             } else {
                                 btn.bind("click", (e: any) => {
                                     e.preventDefault();
-                                    dt.page((parseInt($("a", this).text(), 10) - 1));
+                                    dt.page((parseInt($("a", e.currentTarget).text(), 10) - 1));
                                     fnDraw(settings);
                                 });
                             }

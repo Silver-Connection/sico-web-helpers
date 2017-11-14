@@ -54,7 +54,6 @@ var sico;
                     $(els[3]).bind("click.DT", { action: "last" }, fnClickHandler);
                 },
                 fnUpdate: function (settings, fnDraw) {
-                    var _this = this;
                     var dt = $(settings.nTable).dataTable().api();
                     var info = dt.page.info();
                     var an = settings.aanFeatures["p"];
@@ -98,7 +97,7 @@ var sico;
                             else {
                                 btn.bind("click", function (e) {
                                     e.preventDefault();
-                                    dt.page((parseInt($("a", _this).text(), 10) - 1));
+                                    dt.page((parseInt($("a", e.currentTarget).text(), 10) - 1));
                                     fnDraw(settings);
                                 });
                             }
