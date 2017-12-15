@@ -30,6 +30,31 @@ var sico;
                 },
             };
         };
+        DropzoneHelper.$file = function (modelUpdate, hideForm) {
+            if (hideForm === void 0) { hideForm = true; }
+            Dropzone.options.dropzoneImageEdit = {
+                paramName: "model.File",
+                maxFilesize: 10,
+                uploadMultiple: false,
+                parallelUploads: 1,
+                previewTemplate: sico.DropzoneHelper.TEMPLATE,
+                thumbnailHeight: null,
+                thumbnailWidth: null,
+                method: "POST",
+                init: function () {
+                    this.on("success", function (file, respond) {
+                        sico.Transaction.$noify(respond);
+                        if (respond.Code === 1) {
+                            $(".dz-preview.dz-success").remove();
+                            if (hideForm) {
+                                $("#dropzoneImageEdit").addClass("hidden");
+                            }
+                            modelUpdate(respond);
+                        }
+                    });
+                },
+            };
+        };
         DropzoneHelper.$uploadShow = function (el) {
             $(el).removeClass("d-none").addClass("show");
         };
