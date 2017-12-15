@@ -1,6 +1,6 @@
 {
   "name": "sico-common-web",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Tools and wrappers for common javascript tools used for browser and front-end development",
   "author": "Silver Connection",
   "license": "MIT",
