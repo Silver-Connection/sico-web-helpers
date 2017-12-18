@@ -32,7 +32,7 @@ var sico;
         };
         DropzoneHelper.$file = function (modelUpdate, hideForm) {
             if (hideForm === void 0) { hideForm = true; }
-            Dropzone.options.dropzoneImageEdit = {
+            Dropzone.options.dropzoneFileEdit = {
                 paramName: "model.File",
                 maxFilesize: 10,
                 uploadMultiple: false,
@@ -56,7 +56,7 @@ var sico;
             };
         };
         DropzoneHelper.$uploadShow = function (el) {
-            $(el).removeClass("d-none").addClass("show");
+            $(el).removeClass("d-none").removeClass("hidden").addClass("show");
         };
         DropzoneHelper.$deleteOverlayShow = function (id) {
             $("#image_" + id).addClass("overlay-flex");
