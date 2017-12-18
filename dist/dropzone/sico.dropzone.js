@@ -47,7 +47,7 @@ var sico;
                         if (respond.Code === 1) {
                             $(".dz-preview.dz-success").remove();
                             if (hideForm) {
-                                $("#dropzoneImageEdit").addClass("hidden");
+                                $("#dropzoneFileEdit").addClass("hidden");
                             }
                             modelUpdate(respond);
                         }

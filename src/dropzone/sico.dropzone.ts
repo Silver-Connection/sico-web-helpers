@@ -1,7 +1,7 @@
 ﻿/**
  * @summary     Dropzone Helper
  * @description Wrapper with some common tools
- * @version     1.2
+ * @version     1.3
  * @file        sico.dropzone.js
  * @dependencie dropzone.js, jQuery
  * @author      Silver Connection OHG
@@ -108,7 +108,7 @@ namespace sico {
          * Initialize file (any) upload config
          */
         public static $file(modelUpdate: (data: any) => void, hideForm: boolean = true) {
-            Dropzone.options.dropzoneImageEdit = {
+            Dropzone.options.dropzoneFileEdit = {
                 paramName: "model.File",
                 maxFilesize: 10,
                 uploadMultiple: false,
@@ -124,7 +124,7 @@ namespace sico {
                         if (respond.Code === 1) {
                             $(".dz-preview.dz-success").remove();
                             if (hideForm) {
-                                $("#dropzoneImageEdit").addClass("hidden");
+                                $("#dropzoneFileEdit").addClass("hidden");
                             }
                             modelUpdate(respond);
                         }
@@ -137,7 +137,7 @@ namespace sico {
          * Show upload
          */
         public static $uploadShow(el: string | HTMLElement) {
-            $(el).removeClass("d-none").addClass("show");
+            $(el).removeClass("d-none").removeClass("hidden").addClass("show");
         }
 
         /**
