@@ -39,6 +39,9 @@ module.exports = function (grunt) {
         "<%= config.paths.source %>/**/*.d.ts",
         "<%= config.paths.destination %>/**",
         "<%= config.paths.typings %>/**",
+      ],
+      publish: [
+        "<%= config.paths.destination %>/samples",
       ]
     },
 
@@ -87,6 +90,14 @@ module.exports = function (grunt) {
         },{
           src: "<%= config.paths.source %>/vue/sico.vue.d.ts",
           dest: "<%= config.paths.destination %>/vue/index.d.ts",
+        },{
+          expand: true,
+          dot: false,
+          cwd: "inject",
+          src: [
+            "vuejs/index.d.ts",
+          ],
+          dest: "<%= config.paths.destination %>",
         }]
       },
       inject: {
@@ -220,6 +231,7 @@ module.exports = function (grunt) {
     "copy:publish",
     "copy:types",
     "postcss:dist",
+    "clean:publish"
   ]);
 
   // Server
