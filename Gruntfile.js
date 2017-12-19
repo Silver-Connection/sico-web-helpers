@@ -64,9 +64,29 @@ module.exports = function (grunt) {
             "**/*.css",
             "**/_*.scss",
             "**/*.map",
-            "**/*.d.ts",
           ],
           dest: "<%= config.paths.destination %>",
+        }]
+      },
+      types: {
+        files: [{
+          src: "<%= config.paths.source %>/datatables/sico.datatables.d.ts",
+          dest: "<%= config.paths.destination %>/datatables/index.d.ts",
+        },{
+          src: "<%= config.paths.source %>/dropzone/sico.dropzone.d.ts",
+          dest: "<%= config.paths.destination %>/dropzone/index.d.ts",
+        },{
+          src: "<%= config.paths.source %>/google/sico.google.maps.d.ts",
+          dest: "<%= config.paths.destination %>/google/index.d.ts",
+        },{
+          src: "<%= config.paths.source %>/toggler/sico.toggler.d.ts",
+          dest: "<%= config.paths.destination %>/toggler/index.d.ts",
+        },{
+          src: "<%= config.paths.source %>/transaction/sico.transaction.d.ts",
+          dest: "<%= config.paths.destination %>/transaction/index.d.ts",
+        },{
+          src: "<%= config.paths.source %>/vue/sico.vue.d.ts",
+          dest: "<%= config.paths.destination %>/vue/index.d.ts",
         }]
       },
       inject: {
@@ -198,6 +218,7 @@ module.exports = function (grunt) {
     "clean:builds",
     "concurrent:build",
     "copy:publish",
+    "copy:types",
     "postcss:dist",
   ]);
 
@@ -206,4 +227,4 @@ module.exports = function (grunt) {
     "browserSync"
   ]);
 
-}
+};
