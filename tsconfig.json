@@ -9,6 +9,7 @@
     ],
     "module": "ES2015",
     "moduleResolution": "node",
+    "removeComments": false,
     "declaration": true,
     "target": "es5",
     "rootDir": "src",

@@ -76,12 +76,14 @@ var dtConfig = {
 };
 function testDataTableRaw(id) {
     var dt = $(id).DataTable(dtConfig);
+    // Add data
     dt.clear().draw();
     dt.rows.add(createSampleData(120)).draw();
 }
 function testDataTableHelper(id) {
     var dthConfig = $.extend(true, dtConfig, { el: id });
     var dth = new sico.DataTablesHelper(dthConfig);
+    // Add data
     dth.$data(createSampleData(120));
 }
 //# sourceMappingURL=table.js.map

@@ -1,13 +1,41 @@
+/**
+ * @summary     Transaction Model
+ * @description Transaction model used for AJAX and Vue.js
+ * @version     3.0
+ * @file        sico.transaction.js
+ * @dependencie jQuery, remarkable-bootstrap-notify
+ * @author      Silver Connection OHG
+ * @contact     Kiarash G. <kiarash@si-co.net>
+ * @copyright   Copyright 2017 Silver Connection OHG
+ *
+ * This source file is free software, available under the following license:
+ *   MIT license
+ *
+ * This source file is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the license files for details.
+ *
+ * For details please refer to: https://github.com/Silver-Connection/dataTables.bootstrap
+ */
 "use strict";
 var sico;
 (function (sico) {
-    var Transaction = (function () {
+    var Transaction = /** @class */ (function () {
+        /**
+         * Load configurations and create Transaction Object
+         * @constructor
+         * @param {any} opt - Payload Data
+         */
         function Transaction(data) {
             this.Action = "";
             this.Code = 0;
             this.Data = data == null ? {} : data;
             this.Message = "";
         }
+        /**
+         * Check if model implements TransactionModel
+         * @param {TransactionModel} model - Transaction Model
+         */
         Transaction.$isTransaction = function (model) {
             var check = false;
             if (!model) {
@@ -21,11 +49,21 @@ var sico;
             }
             return check;
         };
+        /**
+         * Toggle remarkable-bootstrap-notify
+         * @param {any} model - Transaction Model
+         */
         Transaction.$noify = function (model) {
             if (sico.Transaction.$isTransaction(model)) {
                 sico.Transaction.$notifyNow(model.Action, model.Code, model.Message);
             }
         };
+        /**
+         * Toggle remarkable-bootstrap-notify
+         * @param {string} action
+         * @param {Transaction Code | number} code
+         * @param {string} message
+         */
         Transaction.$notifyNow = function (action, code, message) {
             switch (code) {
                 case 1:
@@ -52,9 +90,15 @@ var sico;
                     break;
             }
         };
+        /**
+         * Toggle remarkable-bootstrap-notify
+         */
         Transaction.prototype.$noify = function () {
             sico.Transaction.$notifyNow(this.Action, this.Code, this.Message);
         };
+        /**
+         * Export Vue.js model function
+         */
         Transaction.prototype.$vue = function () {
             var $this = this;
             return function () { return $this; };

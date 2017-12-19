@@ -1,7 +1,31 @@
+/**
+ * @summary     Vue.js Helper
+ * @description Wrapper with ajax support
+ * @version     2.0
+ * @file        sico.vue.js
+ * @dependencie Vue.js, jQuery, sico.transaction
+ * @author      Silver Connection OHG
+ * @contact     Kiarash G. <kiarash@si-co.net>
+ * @copyright   Copyright 2017 Silver Connection OHG
+ *
+ * This source file is free software, available under the following license:
+ *   MIT license
+ *
+ * This source file is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the license files for details.
+ *
+ * For details please refer to: https://github.com/Silver-Connection/dataTables.bootstrap
+ */
 "use strict";
 var sico;
 (function (sico) {
-    var VueHelper = (function () {
+    var VueHelper = /** @class */ (function () {
+        /**
+         * Load configurations and create Vue Object
+         * @constructor
+         * @param {VueHelperOptions} opt - Configurations
+         */
         function VueHelper(opt) {
             this.options = null;
             this.default = {
@@ -15,16 +39,20 @@ var sico;
             };
             this.vuePrivate = null;
             this.storePrivate = null;
+            // Set defaults
             if (typeof jQuery === "undefined") {
+                // Use underscore
                 opt = _.defaults(this.default, opt);
             }
             else {
                 opt = $.extend(true, this.default, opt);
             }
             this.options = opt;
+            // Check element
             if (this.options.el === "") {
                 throw new Error("No HTML element passed. Valid inputs are: String or HTML Element");
             }
+            // Check data
             if (this.options.data === null) {
                 throw new Error("No data passed for use with Vue.js");
             }
@@ -32,6 +60,7 @@ var sico;
                 var data_1 = this.options.data;
                 this.options.data = function () { return data_1; };
             }
+            // Check path
             if (this.options.path == null || this.options.path === "" || this.options.path === "undefined") {
                 this.options.path = null;
             }
@@ -58,12 +87,19 @@ var sico;
             configurable: true
         });
         Object.defineProperty(VueHelper.prototype, "element", {
+            // tslint:disable-next-line:ban-types
             get: function () {
                 return this.options.el;
             },
             enumerable: true,
             configurable: true
         });
+        /**
+         * Send a GET request to given URL
+         * @param {string} action - Overwrite transaction action name. If action is set to 'hide' no notification will be emitted.
+         * @param {Function} callback - Callback function with respond data as parameter
+         * @param {string} path - Path in Vue data to use for this request. Used for partial update.
+         */
         VueHelper.prototype.$get = function (action, callback, path) {
             if (action === void 0) { action = null; }
             if (callback === void 0) { callback = null; }
@@ -73,6 +109,7 @@ var sico;
             }
             this._ajax({
                 contentType: "application/json",
+                // data: JSON.stringify(this._vue.$data),
                 dataType: "json",
                 method: "GET",
                 url: this.options.get,
@@ -83,6 +120,11 @@ var sico;
                 setNotify: action === "hide" ? false : true,
             }, callback);
         };
+        /**
+         * Send a POST request to given URL
+         * @param {Function} callback - Callback function with respond data as parameter
+         * @param {string} path - Path in Vue data to use for this request. Used for partial update.
+         */
         VueHelper.prototype.$post = function (callback, path) {
             if (callback === void 0) { callback = null; }
             if (path === void 0) { path = null; }
@@ -102,6 +144,11 @@ var sico;
                 setNotify: true,
             }, callback);
         };
+        /**
+         * Send a PUT request to given URL
+         * @param {Function} callback - Callback function with respond data as parameter
+         * @param {string} path - Path in Vue data to use for this request. Used for partial update.
+         */
         VueHelper.prototype.$put = function (callback, path) {
             if (callback === void 0) { callback = null; }
             if (path === void 0) { path = null; }
@@ -121,6 +168,10 @@ var sico;
                 setNotify: true,
             }, callback);
         };
+        /**
+         * Send a GET request to given URL
+         * @param {Function} callback - Callback function with respond data as parameter
+         */
         VueHelper.prototype.$delete = function (callback, path) {
             if (callback === void 0) { callback = null; }
             if (path === void 0) { path = null; }
@@ -129,6 +180,7 @@ var sico;
             }
             this._ajax({
                 contentType: "application/json",
+                // data: JSON.stringify(this._vue.$data),
                 dataType: "json",
                 method: "DELETE",
                 url: this.options.delete,
@@ -139,6 +191,9 @@ var sico;
                 setNotify: true,
             }, callback);
         };
+        /**
+         * Revert data to initial state
+         */
         VueHelper.prototype.$revert = function () {
             if (this.options == null || this.options.data == null || this.vuePrivate == null) {
                 return;
@@ -146,6 +201,7 @@ var sico;
             var data = null;
             var $this = this;
             if (typeof this.options.data === "function") {
+                // data = this.options.data();
             }
             else {
                 data = this.options.data;
@@ -155,6 +211,12 @@ var sico;
                 sico.Transaction.$notifyNow("Revert", 1, "Reverted data to initial state");
             }
         };
+        /**
+         * Set new data for this object
+         * @param {Any} data - Table data
+         * @param {Function} callback - Callback function with respond data as parameter
+         * @param {Boolean} skipTransaction - Trigger transaction notification
+         */
         VueHelper.prototype.$data = function (data, callback, skipTransaction) {
             if (data != null) {
                 this.vue.$set(this.vue, "Data", data);
@@ -166,6 +228,11 @@ var sico;
                 }
             }
         };
+        /**
+         * Find polyfill
+         * @param {String | Array} path to data or array
+         * @param {Function} callback callback function used for search
+         */
         VueHelper.prototype.$find = function (path, callback) {
             if (typeof callback !== "function") {
                 throw new TypeError("callback must be a function");
@@ -180,6 +247,8 @@ var sico;
             if (list === null) {
                 return null;
             }
+            // Makes sures is always has an positive integer as length.
+            // tslint:disable-next-line:no-bitwise
             var length = list.length >>> 0;
             var thisArg = arguments[1];
             for (var i = 0; i < length; i++) {
@@ -236,6 +305,7 @@ var sico;
                 $this.vue.$set($this.vue, "Code", response.Code);
                 $this.vue.$set($this.vue, "Message", response.Message);
                 if (options.setData && response.Code < 2) {
+                    // Get path
                     var path = options.path;
                     if ((path == null || path === "" || path === "undefined")
                         && $this.options.path != null && $this.options.path !== "undefined") {
@@ -246,6 +316,7 @@ var sico;
                     }
                     else {
                         var cmd = "$this.vue.$data." + path + " = response.Data;";
+                        // tslint:disable-next-line:no-eval
                         eval(cmd);
                     }
                 }
@@ -258,6 +329,7 @@ var sico;
             })
                 .fail(function (jqXHR, textStatus, errorThrown) {
                 sico.Transaction.$notifyNow("Request", 2, errorThrown);
+                // tslint:disable-next-line:no-console
                 console.log(textStatus, errorThrown);
             });
         };

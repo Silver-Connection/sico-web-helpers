@@ -1,6 +1,30 @@
+/**
+ * @summary     Toggler
+ * @description bootstrap 4 style plug in for toggling css to elements
+ * @version     1.2.0
+ * @file        sico.toggler.js
+ * @dependencie Bootstrap4, jQuery
+ * @author      Silver Connection OHG
+ * @contact     Kiarash G. <kiarash@si-co.net>
+ * @copyright   Copyright 2017 Silver Connection OHG
+ *
+ * This source file is free software, available under the following license:
+ *   MIT license
+ *
+ * This source file is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the license files for details.
+ *
+ * For details please refer to: https://github.com/Silver-Connection/dataTables.bootstrap
+ */
 "use strict";
 var sico;
 (function (sico) {
+    /**
+     * ------------------------------------------------------------------------
+     * Constants
+     * ------------------------------------------------------------------------
+     */
     var NAME = "toggler";
     var VERSION = "1.1.0";
     var DATA_KEY = "sc.toggler";
@@ -24,7 +48,7 @@ var sico;
     var Selector = {
         DATA_TOGGLE: '[data-toggle="toggler"]',
     };
-    var Toggler = (function () {
+    var Toggler = /** @class */ (function () {
         function Toggler(element) {
             if (typeof (element) === "string") {
                 this._element = $(element);
@@ -57,6 +81,7 @@ var sico;
             });
         };
         Object.defineProperty(Toggler, "VERSION", {
+            // getters
             get: function () {
                 return VERSION;
             },
@@ -119,6 +144,7 @@ var sico;
             var selector = element.getAttribute("data-target");
             if (!selector) {
                 selector = element.getAttribute("href") || "";
+                // selector = /^#[a-z]/i.test(selector) ? selector : null
             }
             return selector;
         };
@@ -135,15 +161,19 @@ var sico;
             return element.getAttribute("data-toggle-off");
         };
         Toggler.prototype._change = function (selector) {
+            // Check if select matched any node
             var listElement = $(selector);
             if (listElement.length <= 0) {
                 return;
             }
+            // Switch state of toggle
             var state = this._switchItem(this._element, false, true);
+            // Get last elemnts
             var previous = $.makeArray($(listElement).find("." + ClassName.ON));
             if (previous.length > 0) {
                 this._switchArray(previous);
             }
+            // Do work
             this._switchArray($.makeArray(listElement));
         };
         Toggler.prototype._switchItem = function (element, isEvent, isToggle) {
@@ -189,6 +219,7 @@ var sico;
         };
         Toggler.prototype._switchArray = function (elements) {
             var _this = this;
+            // Loop over all nodes
             elements.forEach(function (element) {
                 _this._switchItem(element, true);
             });
@@ -196,12 +227,25 @@ var sico;
         return Toggler;
     }());
     sico.Toggler = Toggler;
+    /**
+     * JQuery
+     */
     var TogglerJquery = (function ($) {
+        /**
+         * ------------------------------------------------------------------------
+         * Data Api implementation
+         * ------------------------------------------------------------------------
+         */
         $(document)
             .on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE, function (event) {
             event.preventDefault();
             Toggler.jQueryInterface.call($(this), "switch");
         });
+        /**
+         * ------------------------------------------------------------------------
+         * jQuery
+         * ------------------------------------------------------------------------
+         */
         $.fn[NAME] = Toggler.jQueryInterface;
         $.fn[NAME].Constructor = TogglerJquery;
         $.fn[NAME].noConflict = function () {

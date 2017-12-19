@@ -1,3 +1,22 @@
+/**
+ * @summary     Transaction Model
+ * @description Transaction model used for AJAX and Vue.js
+ * @version     3.0
+ * @file        sico.transaction.js
+ * @dependencie jQuery, remarkable-bootstrap-notify
+ * @author      Silver Connection OHG
+ * @contact     Kiarash G. <kiarash@si-co.net>
+ * @copyright   Copyright 2017 Silver Connection OHG
+ *
+ * This source file is free software, available under the following license:
+ *   MIT license
+ *
+ * This source file is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the license files for details.
+ *
+ * For details please refer to: https://github.com/Silver-Connection/dataTables.bootstrap
+ */
 "use strict";
 export var NOTIFY_INFO = {
     delay: 5000,
@@ -14,13 +33,24 @@ export var NOTIFY_ERROR = {
     icon_type: "class",
     type: "danger",
 };
-var Transaction = (function () {
+var Transaction = /** @class */ (function () {
+    /**
+     * Load configurations and create Transaction Object
+     * @constructor
+     * @param {any} opt - Payload Data
+     */
     function Transaction(data) {
         this.Action = "";
         this.Code = 0;
         this.Data = data == null ? {} : data;
         this.Message = "";
     }
+    /**
+     * Toggle remarkable-bootstrap-notify
+     * @param {string} action
+     * @param {Transaction Code | number} code
+     * @param {string} message
+     */
     Transaction.$notifyNow = function (action, code, message) {
         switch (code) {
             case 1:
@@ -47,6 +77,10 @@ var Transaction = (function () {
                 break;
         }
     };
+    /**
+     * Check if model implements Transaction Model
+     * @param {IModel} model - Transaction Model
+     */
     Transaction.$isTransaction = function (model) {
         var check = false;
         if (!model) {
@@ -60,6 +94,9 @@ var Transaction = (function () {
         }
         return check;
     };
+    /**
+     * Toggle remarkable-bootstrap-notify
+     */
     Transaction.prototype.$noify = function (model) {
         if (model === void 0) { model = null; }
         if (model != null && Transaction.$isTransaction(model)) {
@@ -69,6 +106,10 @@ var Transaction = (function () {
             Transaction.$notifyNow(this.Action, this.Code, this.Message);
         }
     };
+    /**
+     * Check if model implements Transaction Model
+     * @param {IModel} model - Transaction Model
+     */
     Transaction.prototype.$isTransaction = function (model) {
         return Transaction.$isTransaction(model);
     };

@@ -10,14 +10,59 @@ declare namespace sico.maps {
         html?: string;
     }
     interface IMapOptions {
+        /**
+         * This is the element in which the map gets rendered
+         * @default document.getElementById("gmap_canvas")
+         * @type HTMLElement
+         */
         element: HTMLElement;
+        /**
+         * Google maps options. Styles and co.
+         * @default {mapTypeId: google.maps.MapTypeId.ROADMAP}
+         * @type google.maps.MapOptions
+         */
         map?: google.maps.MapOptions;
+        /**
+         * Location of the destination
+         * @default new google.maps.LatLng(0, 0)
+         * @type google.maps.MapOptions
+         */
         location: google.maps.LatLng;
+        /**
+         * HTML Content of the info window
+         * @default "<strong>Name</strong><br/>Street No. 123"
+         * @type string
+         */
         title: string;
+        /**
+         * Show info window on map load
+         * @default true
+         * @type boolean
+         */
         titleShow?: boolean;
+        /**
+         * Array of marker options
+         * @default null
+         * @type google.maps.MarkerOptions[]
+         */
         marker?: IMarkerOptions[];
+        /**
+         * Direction service options
+         * @default null
+         * @type google.maps.DirectionsRequest
+         */
         direction?: google.maps.DirectionsRequest;
+        /**
+         * Rectangle overlay options
+         * @default null
+         * @type google.maps.RectangleOptions[]
+         */
         rectangles?: google.maps.RectangleOptions[];
+        /**
+         * Polygon overlay options
+         * @default null
+         * @type google.maps.RectangleOptions[]
+         */
         polygons?: google.maps.PolygonOptions[];
     }
     class Map {
@@ -26,11 +71,40 @@ declare namespace sico.maps {
         protected map: google.maps.Map;
         protected info: google.maps.InfoWindow;
         protected location: google.maps.Marker;
+        /**
+         * Load configuartions
+         * @constructor
+         * @param {IMapOptions} opt - Configuartions
+         */
         constructor(opt: IMapOptions);
+        /**
+         * Add a marker to the map. This is invoked by the "draw()" methode if the marker configuartion is set.
+         * @param {IMarkerOptions} options - Configuartions
+         * @return {void}
+         */
         addMarker(options: IMarkerOptions): void;
+        /**
+         * Add a direction service to the map. This is invoked by the "draw()" methode if the directions configuartion is set.
+         * @param {google.maps.DirectionsRequest} options - Configuartions
+         * @return {void}
+         */
         addDirection(options: google.maps.DirectionsRequest): void;
+        /**
+         * Add a rectangle to the map. This is invoked by the "draw()" methode if the directions configuartion is set.
+         * @param {google.maps.DirectionsRequest} options - Configuartions
+         * @return {void}
+         */
         addRectangle(options: google.maps.RectangleOptions): void;
+        /**
+         * Add a polygon to the map. This is invoked by the "draw()" methode if the directions configuartion is set.
+         * @param {google.maps.DirectionsRequest} options - Configuartions
+         * @return {void}
+         */
         addPolygon(options: google.maps.PolygonOptions): void;
+        /**
+         * Render the map, apply marker and direction service, if set.
+         * @return {void}
+         */
         draw(): void;
     }
 }

@@ -15,8 +15,13 @@ var sico;
     (function (maps) {
         var overlay;
         (function (overlay) {
-            var Html = (function (_super) {
+            var Html = /** @class */ (function (_super) {
                 __extends(Html, _super);
+                /**
+                 * Load configuartions
+                 * @constructor
+                 * @param {sico.maps.IMarkerOptions} opt - Configuartions
+                 */
                 function Html(opt) {
                     var _this = _super.call(this) || this;
                     _this.options = null;
@@ -25,11 +30,17 @@ var sico;
                     _this.setMap(_this.options.map);
                     return _this;
                 }
+                /**
+                 * Add html overlays
+                 * @return {void}
+                 */
                 Html.prototype.draw = function () {
                     var point = null;
                     if (this.options.position instanceof google.maps.LatLng) {
                         point = this.getProjection().fromLatLngToDivPixel(this.options.position);
                     }
+                    // TODO: Fix compiler error
+                    // if (typeof this.options.position == "google.maps.LatLngLiteral") {
                     if (typeof this.options.position) {
                         if (typeof this.options.position.lat === "number" && typeof this.options.position.lng === "number") {
                             point = this.getProjection().fromLatLngToDivPixel(new google.maps.LatLng(this.options.position.lat, this.options.position.lng));
@@ -45,13 +56,16 @@ var sico;
                 };
                 Html.prototype.onAdd = function () {
                     if (this.div == null) {
+                        // Create div
                         this.div = document.createElement("div");
                         this.div.className = "map-icon-label";
-                        this.div.style.zIndex = this.get("zIndex");
+                        this.div.style.zIndex = this.get("zIndex"); // Allow label to overlay marker
                         this.div.style.position = "absolute";
                         this.div.style.display = "block";
                         this.div.innerHTML = this.options.html;
+                        // Add to DOM
                         this.getPanes().overlayImage.appendChild(this.div);
+                        // Listener
                         var self_1 = this;
                         this.listeners = [
                             google.maps.event.addListener(this, "position_changed", function () { self_1.draw(); }),

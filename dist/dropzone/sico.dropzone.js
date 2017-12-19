@@ -1,9 +1,31 @@
+/**
+ * @summary     Dropzone Helper
+ * @description Wrapper with some common tools
+ * @version     1.3
+ * @file        sico.dropzone.js
+ * @dependencie dropzone.js, jQuery
+ * @author      Silver Connection OHG
+ * @contact     Kiarash G. <kiarash@si-co.net>
+ * @copyright   Copyright 2017 Silver Connection OHG
+ *
+ * This source file is free software, available under the following license:
+ *   MIT license
+ *
+ * This source file is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the license files for details.
+ *
+ * For details please refer to: https://github.com/Silver-Connection/dataTables.bootstrap
+ */
 "use strict";
 var sico;
 (function (sico) {
-    var DropzoneHelper = (function () {
+    var DropzoneHelper = /** @class */ (function () {
         function DropzoneHelper() {
         }
+        /**
+         * Initialize image upload config
+         */
         DropzoneHelper.$image = function (modelUpdate, hideForm) {
             if (hideForm === void 0) { hideForm = true; }
             Dropzone.options.dropzoneImageEdit = {
@@ -30,6 +52,9 @@ var sico;
                 },
             };
         };
+        /**
+         * Initialize file (any) upload config
+         */
         DropzoneHelper.$file = function (modelUpdate, hideForm) {
             if (hideForm === void 0) { hideForm = true; }
             Dropzone.options.dropzoneFileEdit = {
@@ -55,17 +80,30 @@ var sico;
                 },
             };
         };
+        /**
+         * Show upload
+         */
         DropzoneHelper.$uploadShow = function (el) {
             $(el).removeClass("d-none").removeClass("hidden").addClass("show");
         };
+        /**
+         * Show delete overlay
+         */
         DropzoneHelper.$deleteOverlayShow = function (id) {
             $("#image_" + id).addClass("overlay-flex");
         };
+        /**
+         * Hide delete overlay
+         */
         DropzoneHelper.$deleteOverlayHide = function (id) {
             $("#image_" + id).removeClass("overlay-flex");
         };
+        /**
+         * Show fullsize image
+         */
         DropzoneHelper.$modalShow = function (url, title) {
             if (title === void 0) { title = "Image"; }
+            // Add modal
             if ($("#modal-image-fullsize").length === 0) {
                 $("body").append(DropzoneHelper.MODAL);
             }
