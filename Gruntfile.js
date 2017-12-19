@@ -13,7 +13,7 @@ module.exports = function (grunt) {
     paths: {
       source: "src",
       destination: "dist",
-      typings: "typings",
+      typings: "types",
     },
   };
 
@@ -36,6 +36,7 @@ module.exports = function (grunt) {
         "<%= config.paths.source %>/**/*.css",
         "<%= config.paths.source %>/**/*.js",
         "<%= config.paths.source %>/**/*.map",
+        "<%= config.paths.source %>/**/*.d.ts",
         "<%= config.paths.destination %>/**",
         "<%= config.paths.typings %>/**",
       ]
@@ -63,6 +64,7 @@ module.exports = function (grunt) {
             "**/*.css",
             "**/_*.scss",
             "**/*.map",
+            "**/*.d.ts",
           ],
           dest: "<%= config.paths.destination %>",
         }]

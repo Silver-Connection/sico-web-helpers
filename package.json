@@ -14,7 +14,7 @@
     "vue"
   ],
   "private": false,
-  "typings": "types/index.d.ts",
+  "typings": "dist/*/*.d.ts",
   "files": [
     "docs",
     "src",
