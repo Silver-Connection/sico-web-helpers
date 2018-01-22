@@ -32,22 +32,22 @@
     font-size: 88px;
     font-size: 5.5rem;
     font-weight: 300;
-    line-height: 1.1; }
+    line-height: 1.2; }
   .text-shift-down .display-2 {
     font-size: 72px;
     font-size: 4.5rem;
     font-weight: 300;
-    line-height: 1.1; }
+    line-height: 1.2; }
   .text-shift-down .display-3 {
     font-size: 56px;
     font-size: 3.5rem;
     font-weight: 300;
-    line-height: 1.1; }
+    line-height: 1.2; }
   .text-shift-down .display-4 {
     font-size: 40px;
     font-size: 2.5rem;
     font-weight: 300;
-    line-height: 1.1; }
+    line-height: 1.2; }
 
 .btn-hover-primary:hover {
   color: #fff;
@@ -66,18 +66,18 @@
 
 .btn-hover-secondary:hover {
   color: #fff;
-  background-color: #868e96;
-  border-color: #868e96; }
+  background-color: #6c757d;
+  border-color: #6c757d; }
 .btn-hover-secondary:focus, .btn-hover-secondary.focus {
-  -webkit-box-shadow: 0 0 0 3px rgba(134, 142, 150, 0.5);
-          box-shadow: 0 0 0 3px rgba(134, 142, 150, 0.5); }
+  -webkit-box-shadow: 0 0 0 3px rgba(108, 117, 125, 0.5);
+          box-shadow: 0 0 0 3px rgba(108, 117, 125, 0.5); }
 .btn-hover-secondary.disabled, .btn-hover-secondary:disabled {
-  color: #868e96;
+  color: #6c757d;
   background-color: transparent; }
 .btn-hover-secondary:active, .btn-hover-secondary.active, .show > .btn-hover-secondary.dropdown-toggle {
   color: #fff;
-  background-color: #868e96;
-  border-color: #868e96; }
+  background-color: #6c757d;
+  border-color: #6c757d; }
 
 .btn-hover-success:hover {
   color: #fff;

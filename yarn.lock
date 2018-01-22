@@ -14,23 +14,23 @@
   dependencies:
     "@types/jquery" "*"
 
-"@types/datatables.net-buttons@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@types/datatables.net-buttons/-/datatables.net-buttons-1.1.4.tgz#58d68c3409044357c42f61e5b7e02ddbc1a4a817"
+"@types/datatables.net-buttons@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@types/datatables.net-buttons/-/datatables.net-buttons-1.4.0.tgz#e9c7a0dd4c01c5e5deda7c3fafb002f6d9232d9c"
   dependencies:
     "@types/datatables.net" "*"
     "@types/jquery" "*"
 
-"@types/datatables.net-fixedheader@^3.1.2":
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/@types/datatables.net-fixedheader/-/datatables.net-fixedheader-3.1.2.tgz#12decb60a7719aa3b4fd416dc8677dafb05c5add"
+"@types/datatables.net-fixedheader@^3.1.3":
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/@types/datatables.net-fixedheader/-/datatables.net-fixedheader-3.1.3.tgz#4e06271657878a0358fff8f735c328869799b5be"
   dependencies:
     "@types/datatables.net" "*"
     "@types/jquery" "*"
 
-"@types/datatables.net-select@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@types/datatables.net-select/-/datatables.net-select-1.2.2.tgz#7155fa61a64f92207a72f3eb2ab8330653a53fd2"
+"@types/datatables.net-select@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@types/datatables.net-select/-/datatables.net-select-1.2.3.tgz#0306ffdcc6635cabfe50fdb10d3e9c238c5aaf01"
   dependencies:
     "@types/datatables.net" "*"
     "@types/jquery" "*"
@@ -41,17 +41,21 @@
   dependencies:
     "@types/jquery" "*"
 
-"@types/googlemaps@^3.29.2":
-  version "3.29.2"
-  resolved "https://registry.yarnpkg.com/@types/googlemaps/-/googlemaps-3.29.2.tgz#6af8b3f6b94a2d4f590b95c738b905a49b97aa91"
+"@types/googlemaps@^3.30.4":
+  version "3.30.4"
+  resolved "https://registry.yarnpkg.com/@types/googlemaps/-/googlemaps-3.30.4.tgz#6f3ecd321b89e83b67685588189ece95aecdb4d2"
 
-"@types/jquery@*", "@types/jquery@^3.2.15":
+"@types/jquery@*":
   version "3.2.15"
   resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.2.15.tgz#3f620a9f5a0b296866f4bc729825226d0a35fba6"
 
-"@types/underscore@^1.8.3":
-  version "1.8.3"
-  resolved "https://registry.yarnpkg.com/@types/underscore/-/underscore-1.8.3.tgz#d3cb512dd3dde32b2bbba4be0ca68bd3dad4a1f5"
+"@types/jquery@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.3.0.tgz#6316ac20a1a13c5d521a2dc661befc7184f73f5b"
+
+"@types/underscore@^1.8.7":
+  version "1.8.7"
+  resolved "https://registry.yarnpkg.com/@types/underscore/-/underscore-1.8.7.tgz#5e4fe5d18376647fb8a1fe33f8ded0d8ccfa783c"
 
 abbrev@1:
   version "1.1.1"
@@ -299,9 +303,9 @@ bootstrap-notify@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/bootstrap-notify/-/bootstrap-notify-3.1.3.tgz#7e98b3a696cf452a7b56727f0b3316a90037c10b"
 
-bootstrap@4.0.0-beta:
-  version "4.0.0-beta"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.0.0-beta.tgz#dc5928175d2e71310bc668cf9e05a907211b72a6"
+bootstrap@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.0.0.tgz#ceb03842c145fcc1b9b4e15da2a05656ba68469a"
 
 brace-expansion@^1.1.7:
   version "1.1.8"
@@ -700,9 +704,9 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-datatables.net-buttons@^1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/datatables.net-buttons/-/datatables.net-buttons-1.4.2.tgz#e391e1da4c20e381bc67bb1b8ce0ae36c9a3da49"
+datatables.net-buttons@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/datatables.net-buttons/-/datatables.net-buttons-1.5.1.tgz#cdb35c0c8b0260cd45b0df6b39f6da815357febb"
   dependencies:
     datatables.net "^1.10.15"
     jquery ">=1.7"
@@ -714,9 +718,9 @@ datatables.net-fixedheader@^3.1.3:
     datatables.net "^1.10.15"
     jquery ">=1.7"
 
-datatables.net-select@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/datatables.net-select/-/datatables.net-select-1.2.3.tgz#7c272e81732a41214e101b656f5525d37ec37288"
+datatables.net-select@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/datatables.net-select/-/datatables.net-select-1.2.4.tgz#799eed5d8cfcf21e4502b49c61e84fc4b5f457f7"
   dependencies:
     datatables.net "^1.10.15"
     jquery ">=1.7"
@@ -1691,9 +1695,13 @@ jquery-validation@^1.17.0:
   dependencies:
     jquery "^1.7 || ^2.0 || ^3.1"
 
-jquery@>=1.7, "jquery@^1.7 || ^2.0 || ^3.1", jquery@^3.2.1:
+jquery@>=1.7, "jquery@^1.7 || ^2.0 || ^3.1":
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
+
+jquery@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
 js-base64@^2.1.9:
   version "2.3.2"
@@ -2220,9 +2228,9 @@ plur@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/plur/-/plur-1.0.0.tgz#db85c6814f5e5e5a3b49efc28d604fec62975156"
 
-popper.js@^1.12.5:
-  version "1.12.5"
-  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.12.5.tgz#229e4dea01629e1f1a1e26991ffade5024220fa6"
+popper.js@^1.12.9:
+  version "1.12.9"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.12.9.tgz#0dfbc2dff96c451bb332edcfcfaaf566d331d5b3"
 
 portscanner@2.1.1:
   version "2.1.1"
@@ -3159,9 +3167,9 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "~1.0.0"
     spdx-expression-parse "~1.0.0"
 
-vee-validate@^2.0.0-rc.19:
-  version "2.0.0-rc.19"
-  resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-2.0.0-rc.19.tgz#4b96311d13c4d0ab3f5810da159a841e217b2e65"
+vee-validate@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-2.0.3.tgz#f17fa3d7d53a5344a0e794938346927abb252ef7"
 
 vendors@^1.0.0:
   version "1.0.1"
@@ -3175,9 +3183,9 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vue@^2.5.2:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.2.tgz#fd367a87bae7535e47f9dc5c9ec3b496e5feb5a4"
+vue@^2.5.13:
+  version "2.5.13"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.13.tgz#95bd31e20efcf7a7f39239c9aa6787ce8cf578e1"
 
 websocket-driver@>=0.5.1:
   version "0.7.0"

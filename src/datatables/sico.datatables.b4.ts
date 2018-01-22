@@ -1,7 +1,7 @@
 ﻿/**
  * @summary     DataTables Bootstrap 4 helper
  * @description Converts Paging and search to work with bootstrap
- * @version     2.2
+ * @version     2.3
  * @file        dataTables.bootstrap.js
  * @author      Silver Connection OHG
  * @contact     Kiarash G. <kiarash@si-co.net>
@@ -133,7 +133,7 @@ namespace sico {
                 }
                 const filterInput = $("div.dataTables_filter input", table).attr("placeholder", filterString);
                 const filterHtml = $("<div>", { class: "input-group" })
-                    .append('<div class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></div>')
+                    .append('<div class="input-group-prepend"><i class="fa fa-search" aria-hidden="true"></i></div>')
                     .append(filterInput);
                 $("div.dataTables_filter", table).addClass("form-group").append(filterHtml);
                 $("div.dataTables_filter label", table).detach();
@@ -153,7 +153,7 @@ namespace sico {
                     .addClass("pull-right");
                 const pageSelect = $("div.dataTables_length select", table);
                 const pageHtml = $("<div>", { class: "input-group" })
-                    .append('<span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>')
+                    .append('<span class="input-group-prepend"><i class="fa fa-list" aria-hidden="true"></i></span>')
                     .append(pageSelect);
                 $("div.dataTables_length", table).append(pageHtml);
                 const pageString: string = $("div.dataTables_length label", table).text().trim();
