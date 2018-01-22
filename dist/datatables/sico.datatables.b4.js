@@ -36,7 +36,7 @@ var sico;
                 }
                 var filterInput = $("div.dataTables_filter input", table).attr("placeholder", filterString);
                 var filterHtml = $("<div>", { class: "input-group" })
-                    .append('<div class="input-group-prepend"><i class="fa fa-search" aria-hidden="true"></i></div>')
+                    .append('<div class="input-group-prepend"><i class="input-group-text fa fa-search" aria-hidden="true"></i></div>')
                     .append(filterInput);
                 $("div.dataTables_filter", table).addClass("form-group").append(filterHtml);
                 $("div.dataTables_filter label", table).detach();
@@ -55,7 +55,7 @@ var sico;
                     .addClass("pull-right");
                 var pageSelect = $("div.dataTables_length select", table);
                 var pageHtml = $("<div>", { class: "input-group" })
-                    .append('<span class="input-group-prepend"><i class="fa fa-list" aria-hidden="true"></i></span>')
+                    .append('<span class="input-group-prepend"><i class="input-group-text fa fa-list" aria-hidden="true"></i></span>')
                     .append(pageSelect);
                 $("div.dataTables_length", table).append(pageHtml);
                 var pageString = $("div.dataTables_length label", table).text().trim();
