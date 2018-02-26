@@ -1,7 +1,7 @@
 /**
  * @summary     Vue.js Helper
  * @description Wrapper with ajax support
- * @version     2.0
+ * @version     2.3
  * @file        sico.vue.js
  * @dependencie Vue.js, jQuery, sico.transaction
  * @author      Silver Connection OHG
@@ -70,17 +70,113 @@ namespace sico {
     }
 
     export class VueHelper {
+        /**
+         * Send ajax request without settings data.
+         * @param {JQueryAjaxSettings} settings - jQuery ajaxy settings
+         * @param {string} action - Action name for display in notify.
+         * @param {Function} callback - Callback function with respond data as parameter
+         */
+        public static ajax(settings: JQueryAjaxSettings, action: string = null, callback: FunctionCallback = null): void {
+            VueHelper._ajax(settings,
+                {
+                    action,
+                    path: "",
+                    setData: false,
+                    setNotify: action === "hide" ? false : true,
+                },
+                null,
+                callback);
+        }
+
+        /**
+         * Find polyfill
+         * @param {Array} Array
+         * @param {Function} callback callback function used for search
+         */
+        public static find(path: any[], callback: (el: any, index?: number) => boolean) {
+            if (typeof callback !== "function") {
+                throw new TypeError("callback must be a function");
+            }
+
+            let list = null;
+            if (path && path.constructor === Array) {
+                list = path;
+            }
+
+            if (list === null) {
+                return null;
+            }
+
+            // Makes sures is always has an positive integer as length.
+            // tslint:disable-next-line:no-bitwise
+            const length = list.length >>> 0;
+            const thisArg = arguments[1];
+            for (let i = 0; i < length; i++) {
+                const element = list[i];
+                if (callback.call(thisArg, element, i, list)) {
+                    return element;
+                }
+            }
+        }
+
+        private static _ajax(settings: JQueryAjaxSettings, options: VueHelperAjaxOptions, $this: VueHelper = null, callback: FunctionCallback = null): void {
+            $.ajax(settings)
+                .done((response: TransactionModel) => {
+                    let isTransaction = true;
+                    if (!sico.Transaction.$isTransaction(response)) {
+                        isTransaction = false;
+                        response = new sico.Transaction(response);
+                        response.Code = 1;
+                    }
+
+                    if ($this != null) {
+                        $this.vue.$set($this.vue, "Action", response.Action);
+                        $this.vue.$set($this.vue, "Code", response.Code);
+                        $this.vue.$set($this.vue, "Message", response.Message);
+                        if (options.setData && response.Code < 2) {
+                            // Get path
+                            let path = options.path;
+                            if ((path == null || path === "" || path === "undefined")
+                                && $this.options.path != null && $this.options.path !== "undefined") {
+                                path = $this.options.path;
+                            }
+
+                            if (path == null || path === "" || path === "undefined") {
+                                $this.vue.$set($this.vue, "Data", response.Data);
+                            } else {
+                                const cmd = "$this.vue.$data." + path + " = response.Data;";
+                                // tslint:disable-next-line:no-eval
+                                eval(cmd);
+                            }
+                        }
+                    }
+
+                    if (response.Code < 2 && callback && typeof callback === "function") {
+                        callback(isTransaction ? response : response.Data);
+                    }
+
+                    if (options.setNotify) {
+                        sico.Transaction.$notifyNow(options.action === null ? response.Action : options.action, response.Code, response.Message);
+                    }
+                })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                    sico.Transaction.$notifyNow("Request", 2, errorThrown);
+                    // tslint:disable-next-line:no-console
+                    console.log(textStatus, errorThrown);
+                });
+        }
+
         public options: VueHelperOptions = null;
         protected default: VueHelperOptions =
-        {
-            data: null,
-            delete: null,
-            el: "",
-            get: null,
-            path: null,
-            post: null,
-            put: null,
-        };
+            {
+                data: null,
+                delete: null,
+                el: "",
+                get: null,
+                path: null,
+                post: null,
+                put: null,
+            };
 
         private vuePrivate: vuejs.Vue = null;
         get vue(): vuejs.Vue {
@@ -152,7 +248,7 @@ namespace sico {
                 return;
             }
 
-            this._ajax(
+            VueHelper._ajax(
                 {
                     contentType: "application/json",
                     // data: JSON.stringify(this._vue.$data),
@@ -166,6 +262,7 @@ namespace sico {
                     setData: true,
                     setNotify: action === "hide" ? false : true,
                 },
+                this,
                 callback);
         }
 
@@ -179,7 +276,7 @@ namespace sico {
                 return;
             }
 
-            this._ajax(
+            VueHelper._ajax(
                 {
                     contentType: "application/json",
                     data: JSON.stringify(this._getData(path)),
@@ -193,6 +290,7 @@ namespace sico {
                     setData: true,
                     setNotify: true,
                 },
+                this,
                 callback);
         }
 
@@ -206,7 +304,7 @@ namespace sico {
                 return;
             }
 
-            this._ajax(
+            VueHelper._ajax(
                 {
                     contentType: "application/json",
                     data: JSON.stringify(this._getData(path)),
@@ -220,6 +318,7 @@ namespace sico {
                     setData: true,
                     setNotify: true,
                 },
+                this,
                 callback);
         }
 
@@ -232,7 +331,7 @@ namespace sico {
                 return;
             }
 
-            this._ajax(
+            VueHelper._ajax(
                 {
                     contentType: "application/json",
                     // data: JSON.stringify(this._vue.$data),
@@ -246,6 +345,7 @@ namespace sico {
                     setData: false,
                     setNotify: true,
                 },
+                this,
                 callback);
         }
 
@@ -296,10 +396,6 @@ namespace sico {
          * @param {Function} callback callback function used for search
          */
         public $find(path: string | any[], callback: (el: any, index?: number) => boolean) {
-            if (typeof callback !== "function") {
-                throw new TypeError("callback must be a function");
-            }
-
             let list = null;
             if (path && path.constructor === Array) {
                 list = path;
@@ -313,16 +409,7 @@ namespace sico {
                 return null;
             }
 
-            // Makes sures is always has an positive integer as length.
-            // tslint:disable-next-line:no-bitwise
-            const length = list.length >>> 0;
-            const thisArg = arguments[1];
-            for (let i = 0; i < length; i++) {
-                const element = list[i];
-                if (callback.call(thisArg, element, i, list)) {
-                    return element;
-                }
-            }
+            return VueHelper.find(list, callback);
         }
 
         private _getData(path: string): any {
@@ -358,52 +445,6 @@ namespace sico {
             }
 
             return list;
-        }
-
-        private _ajax(settings: JQueryAjaxSettings, options: VueHelperAjaxOptions, callback: FunctionCallback = null): void {
-            const $this = this;
-            $.ajax(settings)
-                .done((response: TransactionModel) => {
-                    let isTransaction = true;
-                    if (!sico.Transaction.$isTransaction(response)) {
-                        isTransaction = false;
-                        response = new sico.Transaction(response);
-                        response.Code = 1;
-                    }
-
-                    $this.vue.$set($this.vue, "Action", response.Action);
-                    $this.vue.$set($this.vue, "Code", response.Code);
-                    $this.vue.$set($this.vue, "Message", response.Message);
-                    if (options.setData && response.Code < 2) {
-                        // Get path
-                        let path = options.path;
-                        if ((path == null || path === "" || path === "undefined")
-                            && $this.options.path != null && $this.options.path !== "undefined") {
-                            path = $this.options.path;
-                        }
-
-                        if (path == null || path === "" || path === "undefined") {
-                            $this.vue.$set($this.vue, "Data", response.Data);
-                        } else {
-                            const cmd = "$this.vue.$data." + path + " = response.Data;";
-                            // tslint:disable-next-line:no-eval
-                            eval(cmd);
-                        }
-                    }
-
-                    if (response.Code < 2 && callback && typeof callback === "function") {
-                        callback(isTransaction ? response : response.Data);
-                    }
-
-                    if (options.setNotify) {
-                        sico.Transaction.$notifyNow(options.action === null ? response.Action : options.action, response.Code, response.Message);
-                    }
-                })
-                .fail((jqXHR, textStatus, errorThrown) => {
-                    sico.Transaction.$notifyNow("Request", 2, errorThrown);
-                    // tslint:disable-next-line:no-console
-                    console.log(textStatus, errorThrown);
-                });
         }
     }
 }
