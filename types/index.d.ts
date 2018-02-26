@@ -475,6 +475,7 @@ declare namespace sico {
     }
 }
 /// <reference types="vuejs" />
+/// <reference types="jquery" />
 declare const Vue: vuejs.Vue;
 declare namespace sico {
     type FunctionCallback = (data?: any) => void;
@@ -511,6 +512,20 @@ declare namespace sico {
         delete?: string;
     }
     class VueHelper {
+        /**
+         * Send ajax request without settings data.
+         * @param {JQueryAjaxSettings} settings - jQuery ajaxy settings
+         * @param {string} action - Action name for display in notify.
+         * @param {Function} callback - Callback function with respond data as parameter
+         */
+        static ajax(settings: JQueryAjaxSettings, action?: string, callback?: FunctionCallback): void;
+        /**
+         * Find polyfill
+         * @param {Array} Array
+         * @param {Function} callback callback function used for search
+         */
+        static find(path: any[], callback: (el: any, index?: number) => boolean): any;
+        private static _ajax(settings, options, $this?, callback?);
         options: VueHelperOptions;
         protected default: VueHelperOptions;
         private vuePrivate;
@@ -567,6 +582,5 @@ declare namespace sico {
         $find(path: string | any[], callback: (el: any, index?: number) => boolean): any;
         private _getData(path);
         private _getValue(path);
-        private _ajax(settings, options, callback?);
     }
 }

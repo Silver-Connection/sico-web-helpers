@@ -1,7 +1,7 @@
 /**
  * @summary     Vue.js Helper
  * @description Wrapper with ajax support
- * @version     2.0
+ * @version     2.3
  * @file        sico.vue.js
  * @dependencie Vue.js, jQuery, sico.transaction
  * @author      Silver Connection OHG
@@ -66,6 +66,94 @@ var sico;
             }
             this.vuePrivate = new Vue(this.options);
         }
+        /**
+         * Send ajax request without settings data.
+         * @param {JQueryAjaxSettings} settings - jQuery ajaxy settings
+         * @param {string} action - Action name for display in notify.
+         * @param {Function} callback - Callback function with respond data as parameter
+         */
+        VueHelper.ajax = function (settings, action, callback) {
+            if (action === void 0) { action = null; }
+            if (callback === void 0) { callback = null; }
+            VueHelper._ajax(settings, {
+                action: action,
+                path: "",
+                setData: false,
+                setNotify: action === "hide" ? false : true,
+            }, null, callback);
+        };
+        /**
+         * Find polyfill
+         * @param {Array} Array
+         * @param {Function} callback callback function used for search
+         */
+        VueHelper.find = function (path, callback) {
+            if (typeof callback !== "function") {
+                throw new TypeError("callback must be a function");
+            }
+            var list = null;
+            if (path && path.constructor === Array) {
+                list = path;
+            }
+            if (list === null) {
+                return null;
+            }
+            // Makes sures is always has an positive integer as length.
+            // tslint:disable-next-line:no-bitwise
+            var length = list.length >>> 0;
+            var thisArg = arguments[1];
+            for (var i = 0; i < length; i++) {
+                var element = list[i];
+                if (callback.call(thisArg, element, i, list)) {
+                    return element;
+                }
+            }
+        };
+        VueHelper._ajax = function (settings, options, $this, callback) {
+            if ($this === void 0) { $this = null; }
+            if (callback === void 0) { callback = null; }
+            $.ajax(settings)
+                .done(function (response) {
+                var isTransaction = true;
+                if (!sico.Transaction.$isTransaction(response)) {
+                    isTransaction = false;
+                    response = new sico.Transaction(response);
+                    response.Code = 1;
+                }
+                if ($this != null) {
+                    $this.vue.$set($this.vue, "Action", response.Action);
+                    $this.vue.$set($this.vue, "Code", response.Code);
+                    $this.vue.$set($this.vue, "Message", response.Message);
+                    if (options.setData && response.Code < 2) {
+                        // Get path
+                        var path = options.path;
+                        if ((path == null || path === "" || path === "undefined")
+                            && $this.options.path != null && $this.options.path !== "undefined") {
+                            path = $this.options.path;
+                        }
+                        if (path == null || path === "" || path === "undefined") {
+                            $this.vue.$set($this.vue, "Data", response.Data);
+                        }
+                        else {
+                            var cmd = "$this.vue.$data." + path + " = response.Data;";
+                            // tslint:disable-next-line:no-eval
+                            eval(cmd);
+                        }
+                    }
+                }
+                if (response.Code < 2 && callback && typeof callback === "function") {
+                    callback(isTransaction ? response : response.Data);
+                }
+                if (options.setNotify) {
+                    sico.Transaction.$notifyNow(options.action === null ? response.Action : options.action, response.Code, response.Message);
+                }
+            })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                sico.Transaction.$notifyNow("Request", 2, errorThrown);
+                // tslint:disable-next-line:no-console
+                console.log(textStatus, errorThrown);
+            });
+        };
         Object.defineProperty(VueHelper.prototype, "vue", {
             get: function () {
                 return this.vuePrivate;
@@ -107,7 +195,7 @@ var sico;
             if (this.options == null || this.options.get == null || this.vuePrivate == null) {
                 return;
             }
-            this._ajax({
+            VueHelper._ajax({
                 contentType: "application/json",
                 // data: JSON.stringify(this._vue.$data),
                 dataType: "json",
@@ -118,7 +206,7 @@ var sico;
                 path: path,
                 setData: true,
                 setNotify: action === "hide" ? false : true,
-            }, callback);
+            }, this, callback);
         };
         /**
          * Send a POST request to given URL
@@ -131,7 +219,7 @@ var sico;
             if (this.options == null || this.options.post == null || this.vuePrivate == null) {
                 return;
             }
-            this._ajax({
+            VueHelper._ajax({
                 contentType: "application/json",
                 data: JSON.stringify(this._getData(path)),
                 dataType: "json",
@@ -142,7 +230,7 @@ var sico;
                 path: path,
                 setData: true,
                 setNotify: true,
-            }, callback);
+            }, this, callback);
         };
         /**
          * Send a PUT request to given URL
@@ -155,7 +243,7 @@ var sico;
             if (this.options == null || this.options.put == null || this.vuePrivate == null) {
                 return;
             }
-            this._ajax({
+            VueHelper._ajax({
                 contentType: "application/json",
                 data: JSON.stringify(this._getData(path)),
                 dataType: "json",
@@ -166,7 +254,7 @@ var sico;
                 path: path,
                 setData: true,
                 setNotify: true,
-            }, callback);
+            }, this, callback);
         };
         /**
          * Send a GET request to given URL
@@ -178,7 +266,7 @@ var sico;
             if (this.options == null || this.options.delete == null || this.vuePrivate == null) {
                 return;
             }
-            this._ajax({
+            VueHelper._ajax({
                 contentType: "application/json",
                 // data: JSON.stringify(this._vue.$data),
                 dataType: "json",
@@ -189,7 +277,7 @@ var sico;
                 path: path,
                 setData: false,
                 setNotify: true,
-            }, callback);
+            }, this, callback);
         };
         /**
          * Revert data to initial state
@@ -234,9 +322,6 @@ var sico;
          * @param {Function} callback callback function used for search
          */
         VueHelper.prototype.$find = function (path, callback) {
-            if (typeof callback !== "function") {
-                throw new TypeError("callback must be a function");
-            }
             var list = null;
             if (path && path.constructor === Array) {
                 list = path;
@@ -247,16 +332,7 @@ var sico;
             if (list === null) {
                 return null;
             }
-            // Makes sures is always has an positive integer as length.
-            // tslint:disable-next-line:no-bitwise
-            var length = list.length >>> 0;
-            var thisArg = arguments[1];
-            for (var i = 0; i < length; i++) {
-                var element = list[i];
-                if (callback.call(thisArg, element, i, list)) {
-                    return element;
-                }
-            }
+            return VueHelper.find(list, callback);
         };
         VueHelper.prototype._getData = function (path) {
             if ((path == null || path === "" || path === "undefined") && this.options.path != null && this.options.path !== "undefined") {
@@ -289,49 +365,6 @@ var sico;
                 }
             }
             return list;
-        };
-        VueHelper.prototype._ajax = function (settings, options, callback) {
-            if (callback === void 0) { callback = null; }
-            var $this = this;
-            $.ajax(settings)
-                .done(function (response) {
-                var isTransaction = true;
-                if (!sico.Transaction.$isTransaction(response)) {
-                    isTransaction = false;
-                    response = new sico.Transaction(response);
-                    response.Code = 1;
-                }
-                $this.vue.$set($this.vue, "Action", response.Action);
-                $this.vue.$set($this.vue, "Code", response.Code);
-                $this.vue.$set($this.vue, "Message", response.Message);
-                if (options.setData && response.Code < 2) {
-                    // Get path
-                    var path = options.path;
-                    if ((path == null || path === "" || path === "undefined")
-                        && $this.options.path != null && $this.options.path !== "undefined") {
-                        path = $this.options.path;
-                    }
-                    if (path == null || path === "" || path === "undefined") {
-                        $this.vue.$set($this.vue, "Data", response.Data);
-                    }
-                    else {
-                        var cmd = "$this.vue.$data." + path + " = response.Data;";
-                        // tslint:disable-next-line:no-eval
-                        eval(cmd);
-                    }
-                }
-                if (response.Code < 2 && callback && typeof callback === "function") {
-                    callback(isTransaction ? response : response.Data);
-                }
-                if (options.setNotify) {
-                    sico.Transaction.$notifyNow(options.action === null ? response.Action : options.action, response.Code, response.Message);
-                }
-            })
-                .fail(function (jqXHR, textStatus, errorThrown) {
-                sico.Transaction.$notifyNow("Request", 2, errorThrown);
-                // tslint:disable-next-line:no-console
-                console.log(textStatus, errorThrown);
-            });
         };
         return VueHelper;
     }());
