@@ -94,6 +94,9 @@ module.exports = function (grunt) {
           src: "<%= config.paths.source %>/vue/sico.vue.d.ts",
           dest: "<%= config.paths.destination %>/vue/index.d.ts",
         },{
+          src: "<%= config.paths.source %>/draw/sico.draw.gauge.d.ts",
+          dest: "<%= config.paths.destination %>/draw/index.d.ts",
+        },{
           expand: true,
           dot: false,
           cwd: "inject",
