@@ -1,0 +1,108 @@
+Draw Gauge
+--
+<!-- TOC -->
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Options](#options)
+    - [Main Options](#main-options)
+    - [Data-series Options](#data-series-options)
+
+<!-- /TOC -->
+
+## Installation
+
+Currently we need jQuery before we can load this script.
+```html
+<!-- jQuery -->
+<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+
+<!-- Draw Gauge -->
+<script type="text/javascript" src="src/draw/sico.draw.gauge.js"></script>
+```
+
+## Usage
+
+This tool will create a canvas element and attach it in to the given Element. 
+
+```javascript
+// Simple gauge with one data value
+const gauge1 = new sico.draw.Gauge(document.getElementById("gauge-1"), {
+        backgroundShow: true,
+        canvasHeight: 400,
+        canvasWidth: 200,
+        centerX: "left",
+        data: [
+            {
+                size: 40,
+                value: 50,
+            },
+        ],
+        deg: 180,
+        offset: 270,
+    });
+```
+
+## Options
+
+This tool is build using typescript so we have some Interfaces we can use for configure our gauge.
+
+```javascript
+// Main options
+interface IGaugeConfig {
+    backgroundColor?: string;
+    backgroundShow?: boolean;
+    canvasHeight?: number;
+    canvasWidth?: number;
+    centerX?: "left" | "center" | "right";
+    centerY?: "top" | "center" | "bottom";
+    deg: number;
+    data?: IGaugeData[];
+    lineCap?: "butt" | "round" | "square";
+    offset?: number;
+}
+
+// Dataseries options
+interface IGaugeData {
+    value: number;
+    label?: string | LabelFunction;
+    labelFont?: string;
+    labelSize?: number;
+    labelShow?: boolean;
+    labelStyle?: string;
+    color?: string;
+    size?: number;
+}
+
+// Label function
+type LabelFunction = (val: number) => string;
+```
+ 
+### Main Options
+
+| Parameter | Type | Default | Description |
+|-|-|-|-|
+|backgroundColor| string | "#E3DBCB" | Background color |
+|backgroundColor| boolean | true | Draw background |
+|canvasHeight| number | 300 | Total height in px |
+|canvasWidth| number | 600 | Total width in px |
+|centerX| string | "center" | Set the x-axis value for the center of the circles, possible options are: "left", "center", "right" |
+|centerY| string | "center" | Set the y-axis value for the center of the circles, possible options are: "top", "center", "bottom" |
+|data| IGaugeData[] | null | Data-series array |
+|deg| number | 180 | Total degree for drawing the gauge, from 0 to 360 |
+|offset| number | 180 | In canvas 0° is at 3 o`clock. If you need to rotate the whole gauge we can use this option. |
+|lineCap| string | "butt" | We can set the line cap style, valid options: "butt", "round", "square" |
+
+
+### Data-series Options
+
+| Parameter | Type | Default | Description |
+|-|-|-|-|
+|color| string | "#0382A0" | Line color |
+|label| string \| LabelFunction | undefined | Label text. We can also pass a function |
+|labelFont| string | "sans-serif" | Label font |
+|labelShow| boolean | true | Draw label |
+|labelSize| number | 20 | Label size in px |
+|labelStyle| string | "normal normal bold" | Label styling, see [Here](https://www.w3schools.com/tags/canvas_font.asp) |
+|size| number | 10 | Line size |
+|value| number | 0 | Value used for drawing the correct length of a line. Valid values are from 0 to 100 |

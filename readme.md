@@ -8,6 +8,7 @@ This is set of common script and styles used for front-end web development.
 - [DataTables](#datatables)
 - [Dropzone](#dropzone)
 - [Transaction & Notification](#transaction--notification)
+- [Draw Gauge](#draw-gauge)
 
 <!-- /TOC -->
 
@@ -48,3 +49,11 @@ The transaction helper is used for easy work with [Vue.js](https://vuejs.org/). 
 > **Documentation**
 >
 > [Read](docs/transaction.md)
+
+## Draw Gauge
+
+This is a little helper for drawing gauge / donut in HTML5 canvas
+
+> **Documentation**
+>
+> [Read](docs/draw-gauge.md)

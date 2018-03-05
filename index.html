@@ -44,6 +44,10 @@
     <script type="text/javascript" src="src/dropzone/sico.dropzone.js"></script>
     <script type="text/javascript" src="src/samples/dropzone.js"></script>
 
+    <!-- Draw -->
+    <script type="text/javascript" src="src/draw/sico.draw.gauge.js"></script>
+    <script type="text/javascript" src="src/samples/draw.js"></script>
+
     <title>Samples</title>
 </head>
 
@@ -62,6 +66,7 @@
                 <a class="nav-item nav-link" data-toggle="tab" href="#tab-maps" role="tab" aria-controls="nav-contact" aria-selected="false">Google Mpas</a>
                 <a class="nav-item nav-link" data-toggle="tab" href="#tab-transaction" role="tab" aria-controls="nav-contact" aria-selected="false">Transaction</a>
                 <a class="nav-item nav-link" data-toggle="tab" href="#tab-vue" role="tab" aria-controls="nav-contact" aria-selected="false">Vue</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#tab-gauge" role="tab" aria-controls="nav-contact" aria-selected="false">Gauge</a>
             </nav>
         </div>
     </nav>
@@ -244,6 +249,30 @@ interface TransactionModel {
                         <button class="btn btn-outline-info" onclick="notifyInfo()">Info</button>
                         <button class="btn btn-outline-success" onclick="notifySuccess()">Success</button>
                         <button class="btn btn-outline-danger" onclick="notifyError()">Error</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab-gauge" role="tabpanel" aria-labelledby="dropzone-tab">
+                <div class="row">
+                    <div class="col-4">
+                        <div id="gauge1"></div>
+                    </div>
+                    <div class="col-4">
+                        <div id="gauge2"></div>
+                    </div>
+                    <div class="col-4">
+                        <div id="gauge3"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div id="gauge4"></div>
+                    </div>
+                    <div class="col-4">
+                        <div id="gauge5"></div>
+                    </div>
+                    <div class="col-4">
+                        <div id="gauge6"></div>
                     </div>
                 </div>
             </div>

@@ -42,7 +42,10 @@ module.exports = function (grunt) {
       ],
       publish: [
         "<%= config.paths.destination %>/samples",
-      ]
+      ],
+      watch: [
+        "<%= config.paths.source %>/**/*.d.ts",
+      ],
     },
 
     // Create dirs
@@ -120,8 +123,8 @@ module.exports = function (grunt) {
         tasks: ["sass:build"]
       },
       ts: {
-        files: "<%= config.paths.source %>/**/*.ts",
-        tasks: ["ts:build"]
+        files: ["<%= config.paths.source %>/**/*.ts", "!<%= config.paths.source %>/**/*.d.ts"],
+        tasks: ["clean:watch", "ts:build"]
       }
     },
 

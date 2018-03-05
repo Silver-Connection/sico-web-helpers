@@ -15,7 +15,7 @@
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
  * or FITNESS FOR A PARTICULAR PURPOSE. See the license files for details.
  *
- * For details please refer to: https://github.com/Silver-Connection/dataTables.bootstrap
+ * For details please refer to: https://github.com/Silver-Connection/sico-web-helpers
  */
 
 "use strict";
