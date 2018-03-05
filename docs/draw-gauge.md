@@ -83,7 +83,7 @@ type LabelFunction = (val: number) => string;
 | Parameter | Type | Default | Description |
 |-|-|-|-|
 |backgroundColor| string | "#E3DBCB" | Background color |
-|backgroundColor| boolean | true | Draw background |
+|backgroundShow| boolean | true | Draw background |
 |canvasHeight| number | 300 | Total height in px |
 |canvasWidth| number | 600 | Total width in px |
 |centerX| string | "center" | Set the x-axis value for the center of the circles, possible options are: "left", "center", "right" |
