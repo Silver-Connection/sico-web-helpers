@@ -1,6 +1,10 @@
+/// <reference types="jquery" />
+/// <reference types="bootstrap" />
+/// <reference types="datatables.net" />
 declare var G_vmlCanvasManager: any;
 declare namespace sico.draw {
     interface IGaugeConfig {
+        autoDraw?: boolean;
         backgroundColor?: string;
         backgroundShow?: boolean;
         canvasHeight?: number;
@@ -27,7 +31,7 @@ declare namespace sico.draw {
         static degToRands(value: number): number;
         static percentToRands(value: number, max: number): number;
         options: IGaugeConfig;
-        el: Element | HTMLElement;
+        el: HTMLElement;
         canvas: HTMLCanvasElement;
         context: CanvasRenderingContext2D;
         protected default: IGaugeConfig;
@@ -36,8 +40,9 @@ declare namespace sico.draw {
         private centerYFactor;
         private gaugeSize;
         private labelSize;
-        constructor(element: Element | HTMLElement, opt: IGaugeConfig);
+        constructor(element: HTMLElement | JQuery<HTMLElement>, opt: IGaugeConfig);
         createCanvas(): void;
+        $draw(): void;
         drawBackground(): void;
         drawGauge(data: IGaugeData, offset?: number): void;
         drawLine(rands: number, size: number, color: string, offset?: number): void;

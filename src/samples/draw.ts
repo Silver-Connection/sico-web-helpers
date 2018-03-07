@@ -8,7 +8,9 @@
 // });
 
 $(document).ready(() => {
-    const gauge1 = new sico.draw.Gauge(document.getElementById("gauge1"), {
+    const el = $("#gauge1");
+    // document.getElementById("gauge1")
+    const gauge1 = new sico.draw.Gauge(el, {
         backgroundShow: true,
         canvasHeight: 400,
         canvasWidth: 400,

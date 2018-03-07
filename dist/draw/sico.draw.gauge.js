@@ -1,7 +1,7 @@
 /**
  * @summary     Draw Gauge
  * @description Creates Gauge chart
- * @version     1.0
+ * @version     1.1
  * @file        sico.draw.gauge.js
  * @dependencie jQuery
  * @author      Silver Connection OHG
@@ -25,6 +25,7 @@ var sico;
         var Gauge = /** @class */ (function () {
             function Gauge(element, opt) {
                 this.default = {
+                    autoDraw: true,
                     backgroundColor: "#E3DBCB",
                     backgroundShow: true,
                     canvasHeight: 300,
@@ -56,7 +57,12 @@ var sico;
                     console.log("Could not find wrapper element");
                     return;
                 }
-                this.el = element;
+                if (element instanceof jQuery) {
+                    this.el = element[0];
+                }
+                if (element instanceof HTMLElement) {
+                    this.el = element;
+                }
                 // Configs
                 this.options = $.extend(true, this.default, opt);
                 this.checkData();
@@ -80,23 +86,8 @@ var sico;
                 }
                 // Create and draw Canvas
                 this.createCanvas();
-                if (this.options.backgroundShow) {
-                    this.drawBackground();
-                }
-                if (this.options != null
-                    && this.options.data != null
-                    && this.options.data.length > 0) {
-                    var offsetLine = 0;
-                    var offsetText = 1;
-                    for (var _i = 0, _a = this.options.data; _i < _a.length; _i++) {
-                        var data = _a[_i];
-                        this.drawGauge(data, offsetLine);
-                        offsetLine += data.size;
-                        if (data.labelShow) {
-                            this.drawText(data, offsetText);
-                            offsetText += data.labelSize + 10;
-                        }
-                    }
+                if (this.options.autoDraw) {
+                    this.$draw();
                 }
             }
             Gauge.degToRands = function (value) {
@@ -123,6 +114,28 @@ var sico;
                 }
                 // Clear
                 // this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            };
+            Gauge.prototype.$draw = function () {
+                // Draw background
+                if (this.options.backgroundShow) {
+                    this.drawBackground();
+                }
+                // Draw data lines
+                if (this.options != null
+                    && this.options.data != null
+                    && this.options.data.length > 0) {
+                    var offsetLine = 0;
+                    var offsetText = 1;
+                    for (var _i = 0, _a = this.options.data; _i < _a.length; _i++) {
+                        var data = _a[_i];
+                        this.drawGauge(data, offsetLine);
+                        offsetLine += data.size;
+                        if (data.labelShow) {
+                            this.drawText(data, offsetText);
+                            offsetText += data.labelSize + 10;
+                        }
+                    }
+                }
             };
             Gauge.prototype.drawBackground = function () {
                 var rands = Gauge.degToRands(this.options.deg);

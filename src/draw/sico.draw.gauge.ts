@@ -1,7 +1,7 @@
 /**
  * @summary     Draw Gauge
  * @description Creates Gauge chart
- * @version     1.0
+ * @version     1.1
  * @file        sico.draw.gauge.js
  * @dependencie jQuery
  * @author      Silver Connection OHG
@@ -22,6 +22,7 @@ declare var G_vmlCanvasManager: any;
 
 namespace sico.draw {
     export interface IGaugeConfig {
+        autoDraw?: boolean;
         backgroundColor?: string;
         backgroundShow?: boolean;
         canvasHeight?: number;
@@ -57,12 +58,13 @@ namespace sico.draw {
         }
 
         public options: IGaugeConfig;
-        public el: Element | HTMLElement;
+        public el: HTMLElement;
         public canvas: HTMLCanvasElement;
         public context: CanvasRenderingContext2D;
 
         protected default: IGaugeConfig =
             {
+                autoDraw: true,
                 backgroundColor: "#E3DBCB",
                 backgroundShow: true,
                 canvasHeight: 300,
@@ -92,14 +94,20 @@ namespace sico.draw {
         private gaugeSize: number = 0;
         private labelSize: number = 0;
 
-        constructor(element: Element | HTMLElement, opt: IGaugeConfig) {
+        constructor(element: HTMLElement | JQuery<HTMLElement>, opt: IGaugeConfig) {
             // Wrapper
             if (element === null || element === undefined) {
                 // tslint:disable-next-line:no-console
                 console.log("Could not find wrapper element");
                 return;
             }
-            this.el = element;
+
+            if (element instanceof jQuery) {
+                this.el = element[0];
+            }
+            if (element instanceof HTMLElement) {
+                this.el = element;
+            }
 
             // Configs
             this.options = $.extend(true, this.default, opt);
@@ -122,24 +130,8 @@ namespace sico.draw {
 
             // Create and draw Canvas
             this.createCanvas();
-            if (this.options.backgroundShow) {
-                this.drawBackground();
-            }
-
-            if (this.options != null
-                && this.options.data != null
-                && this.options.data.length > 0) {
-                let offsetLine = 0;
-                let offsetText = 1;
-                for (const data of this.options.data) {
-                    this.drawGauge(data, offsetLine);
-                    offsetLine += data.size;
-
-                    if (data.labelShow) {
-                        this.drawText(data, offsetText);
-                        offsetText += data.labelSize + 10;
-                    }
-                }
+            if (this.options.autoDraw) {
+                this.$draw();
             }
         }
 
@@ -165,6 +157,30 @@ namespace sico.draw {
 
             // Clear
             // this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        }
+
+        public $draw() {
+            // Draw background
+            if (this.options.backgroundShow) {
+                this.drawBackground();
+            }
+
+            // Draw data lines
+            if (this.options != null
+                && this.options.data != null
+                && this.options.data.length > 0) {
+                let offsetLine = 0;
+                let offsetText = 1;
+                for (const data of this.options.data) {
+                    this.drawGauge(data, offsetLine);
+                    offsetLine += data.size;
+
+                    if (data.labelShow) {
+                        this.drawText(data, offsetText);
+                        offsetText += data.labelSize + 10;
+                    }
+                }
+            }
         }
 
         public drawBackground() {

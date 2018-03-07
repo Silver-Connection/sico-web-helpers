@@ -7,6 +7,8 @@ Draw Gauge
 - [Options](#options)
     - [Main Options](#main-options)
     - [Data-series Options](#data-series-options)
+- [API](#api)
+    - [$draw()](#draw)
 
 <!-- /TOC -->
 
@@ -50,6 +52,7 @@ This tool is build using typescript so we have some Interfaces we can use for co
 ```javascript
 // Main options
 interface IGaugeConfig {
+    autoDraw?: boolean;
     backgroundColor?: string;
     backgroundShow?: boolean;
     canvasHeight?: number;
@@ -82,6 +85,7 @@ type LabelFunction = (val: number) => string;
 
 | Parameter | Type | Default | Description |
 |-|-|-|-|
+|autoDraw| boolean | true | Block auto-draw in constructer |
 |backgroundColor| string | "#E3DBCB" | Background color |
 |backgroundShow| boolean | true | Draw background |
 |canvasHeight| number | 300 | Total height in px |
@@ -106,3 +110,14 @@ type LabelFunction = (val: number) => string;
 |labelStyle| string | "normal normal bold" | Label styling, see [Here](https://www.w3schools.com/tags/canvas_font.asp) |
 |size| number | 10 | Line size |
 |value| number | 0 | Value used for drawing the correct length of a line. Valid values are from 0 to 100 |
+
+## API
+
+### $draw()
+
+If ```autodraw``` is ```false``` you need to call the ```$draw()``` method manual.
+
+```javascript
+const gauge = new sico.draw.Gauge(el,{...});
+gauge.$draw();
+```
