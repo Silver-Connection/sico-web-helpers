@@ -1,7 +1,7 @@
 /**
  * @summary     Draw Gauge
  * @description Creates Gauge chart
- * @version     1.1
+ * @version     1.2
  * @file        sico.draw.gauge.js
  * @dependencie jQuery
  * @author      Silver Connection OHG
@@ -38,6 +38,7 @@ namespace sico.draw {
     export interface IGaugeData {
         value: number;
         label?: string | LabelFunction;
+        labelColor?: string;
         labelFont?: string;
         labelSize?: number;
         labelShow?: boolean;
@@ -81,6 +82,7 @@ namespace sico.draw {
             {
                 color: "#0382A0",
                 label: undefined,
+                labelColor: "#727272",
                 labelFont: "sans-serif",
                 labelShow: true,
                 labelSize: 20,
@@ -231,6 +233,7 @@ namespace sico.draw {
                 y = offset + this.labelSize / 2;
             }
 
+            this.context.fillStyle = data.labelColor;
             this.context.fillText(label, center.x, y);
         }
 

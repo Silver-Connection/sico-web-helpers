@@ -114,6 +114,7 @@ declare namespace sico.draw {
     interface IGaugeData {
         value: number;
         label?: string | LabelFunction;
+        labelColor?: string;
         labelFont?: string;
         labelSize?: number;
         labelShow?: boolean;

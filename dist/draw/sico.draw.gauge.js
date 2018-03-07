@@ -1,7 +1,7 @@
 /**
  * @summary     Draw Gauge
  * @description Creates Gauge chart
- * @version     1.1
+ * @version     1.2
  * @file        sico.draw.gauge.js
  * @dependencie jQuery
  * @author      Silver Connection OHG
@@ -40,6 +40,7 @@ var sico;
                 this.defaultData = {
                     color: "#0382A0",
                     label: undefined,
+                    labelColor: "#727272",
                     labelFont: "sans-serif",
                     labelShow: true,
                     labelSize: 20,
@@ -181,6 +182,7 @@ var sico;
                 else if (this.options.centerY === "top") {
                     y = offset + this.labelSize / 2;
                 }
+                this.context.fillStyle = data.labelColor;
                 this.context.fillText(label, center.x, y);
             };
             Gauge.prototype.getCenterPoint = function () {

@@ -18,6 +18,7 @@ $(document).ready(() => {
             {
                 size: 40,
                 value: 50,
+                labelColor: "red"
             },
             // {
             //     color: "red",
