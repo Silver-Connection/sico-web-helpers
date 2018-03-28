@@ -1,7 +1,7 @@
 /**
  * @summary     Draw Gauge
  * @description Creates Gauge chart
- * @version     1.3
+ * @version     1.3.1
  * @file        sico.draw.gauge.js
  * @dependencie jQuery
  * @author      Silver Connection OHG
@@ -37,6 +37,7 @@ var sico;
                     lineCap: "butt",
                     labelInverse: false,
                     labelHtml: false,
+                    labelHtmlUseCanvasSize: false,
                     labelCssBase: undefined,
                     offset: 180,
                 };
@@ -102,8 +103,8 @@ var sico;
                         "position": "absolute",
                         "top": 0,
                         "left": 0,
-                        "height": this.options.canvasHeight,
-                        "width": this.options.canvasWidth,
+                        "height": this.options.labelHtmlUseCanvasSize ? this.options.canvasHeight : "100%",
+                        "width": this.options.labelHtmlUseCanvasSize ? this.options.canvasWidth : "100%",
                         "display": "flex",
                         "flex-direction": "column",
                         "justify-content": flexY,

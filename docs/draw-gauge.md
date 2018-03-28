@@ -64,6 +64,7 @@ interface IGaugeConfig {
     lineCap?: "butt" | "round" | "square";
     labelInverse?: boolean;
     labelHtml?: boolean;
+    labelHtmlUseCanvasSize?: boolean;
     labelCssBase?: string;
     offset?: number;
 }
@@ -103,6 +104,7 @@ type LabelFunction = (val: number) => string;
 |lineCap| string | "butt" | We can set the line cap style, valid options: "butt", "round", "square" |
 |labelInverse| boolean | false | You can inverse the order of the labels |
 |labelHtml| boolean | false | Create HTML element for labels instead of drawing into image |
+|labelHtmlUseCanvasSize| boolean | false | Set label wrapper size to canvas dimensions |
 |labelCssBase| string | undefined | Base CSS class for label's span |
 
 
@@ -121,7 +123,8 @@ type LabelFunction = (val: number) => string;
 |size| number | 10 | Line size |
 |value| number | 0 | Value used for drawing the correct length of a line. Valid values are from 0 to 100 |
 
-> If ```labelHtml``` is true only the ```labelCss``` options in the data-series is used. All other ```label*``` options are discarded. 
+> If ```labelHtml``` is true only the ```labelCss``` options in the data-series is used. 
+> All other ```label*``` options are discarded.
 
 ## API
 

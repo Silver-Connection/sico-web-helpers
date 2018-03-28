@@ -1,7 +1,7 @@
 /**
  * @summary     Draw Gauge
  * @description Creates Gauge chart
- * @version     1.3
+ * @version     1.3.1
  * @file        sico.draw.gauge.js
  * @dependencie jQuery
  * @author      Silver Connection OHG
@@ -34,6 +34,7 @@ namespace sico.draw {
         lineCap?: "butt" | "round" | "square";
         labelInverse?: boolean;
         labelHtml?: boolean;
+        labelHtmlUseCanvasSize?: boolean;
         labelCssBase?: string;
         offset?: number;
     }
@@ -82,6 +83,7 @@ namespace sico.draw {
                 lineCap: "butt",
                 labelInverse: false,
                 labelHtml: false,
+                labelHtmlUseCanvasSize: false,
                 labelCssBase: undefined,
                 offset: 180,
             };
@@ -153,8 +155,8 @@ namespace sico.draw {
                     "position": "absolute",
                     "top": 0,
                     "left": 0,
-                    "height": this.options.canvasHeight,
-                    "width": this.options.canvasWidth,
+                    "height": this.options.labelHtmlUseCanvasSize ? this.options.canvasHeight : "100%",
+                    "width": this.options.labelHtmlUseCanvasSize ? this.options.canvasWidth : "100%",
                     "display": "flex",
                     "flex-direction": "column",
                     "justify-content": flexY,
@@ -290,7 +292,7 @@ namespace sico.draw {
 
             let css = this.options.labelCssBase || "";
             if (data.labelCss) {
-                css += " " + data.labelCss; 
+                css += " " + data.labelCss;
             }
 
             this.elLabels.append('<span class="' + css + '">' + label + "</span>");

@@ -111,6 +111,7 @@ declare namespace sico.draw {
         lineCap?: "butt" | "round" | "square";
         labelInverse?: boolean;
         labelHtml?: boolean;
+        labelHtmlUseCanvasSize?: boolean;
         labelCssBase?: string;
         offset?: number;
     }
