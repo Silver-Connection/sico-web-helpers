@@ -14,11 +14,15 @@ declare namespace sico.draw {
         deg: number;
         data?: IGaugeData[];
         lineCap?: "butt" | "round" | "square";
+        labelInverse?: boolean;
+        labelHtml?: boolean;
+        labelCssBase?: string;
         offset?: number;
     }
     interface IGaugeData {
         value: number;
         label?: string | LabelFunction;
+        labelCss?: string;
         labelColor?: string;
         labelFont?: string;
         labelSize?: number;
@@ -33,6 +37,7 @@ declare namespace sico.draw {
         static percentToRands(value: number, max: number): number;
         options: IGaugeConfig;
         el: HTMLElement;
+        elLabels: JQuery<HTMLElement>;
         canvas: HTMLCanvasElement;
         context: CanvasRenderingContext2D;
         protected default: IGaugeConfig;
@@ -48,6 +53,7 @@ declare namespace sico.draw {
         drawGauge(data: IGaugeData, offset?: number): void;
         drawLine(rands: number, size: number, color: string, offset?: number): void;
         drawText(data: IGaugeData, offset: number): void;
+        htmlText(data: IGaugeData): void;
         private getCenterPoint();
         private checkData();
     }

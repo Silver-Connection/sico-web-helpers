@@ -62,6 +62,9 @@ interface IGaugeConfig {
     deg: number;
     data?: IGaugeData[];
     lineCap?: "butt" | "round" | "square";
+    labelInverse?: boolean;
+    labelHtml?: boolean;
+    labelCssBase?: string;
     offset?: number;
 }
 
@@ -69,6 +72,8 @@ interface IGaugeConfig {
 interface IGaugeData {
     value: number;
     label?: string | LabelFunction;
+    labelCss?: string;
+    labelColor?: string;
     labelFont?: string;
     labelSize?: number;
     labelShow?: boolean;
@@ -96,6 +101,9 @@ type LabelFunction = (val: number) => string;
 |deg| number | 180 | Total degree for drawing the gauge, from 0 to 360 |
 |offset| number | 180 | In canvas 0° is at 3 o`clock. If you need to rotate the whole gauge we can use this option. |
 |lineCap| string | "butt" | We can set the line cap style, valid options: "butt", "round", "square" |
+|labelInverse| boolean | false | You can inverse the order of the labels |
+|labelHtml| boolean | false | Create HTML element for labels instead of drawing into image |
+|labelCssBase| string | undefined | Base CSS class for label's span |
 
 
 ### Data-series Options
@@ -104,12 +112,16 @@ type LabelFunction = (val: number) => string;
 |-|-|-|-|
 |color| string | "#0382A0" | Line color |
 |label| string \| LabelFunction | undefined | Label text. We can also pass a function |
+|labelCss| string | undefined | CSS Class for label span element, if ```labelHtml``` is set. |
+|labelColor| string | "#727272" | Label color |
 |labelFont| string | "sans-serif" | Label font |
-|labelShow| boolean | true | Draw label |
 |labelSize| number | 20 | Label size in px |
+|labelShow| boolean | true | Draw label |
 |labelStyle| string | "normal normal bold" | Label styling, see [Here](https://www.w3schools.com/tags/canvas_font.asp) |
 |size| number | 10 | Line size |
 |value| number | 0 | Value used for drawing the correct length of a line. Valid values are from 0 to 100 |
+
+> If ```labelHtml``` is true only the ```labelCss``` options in the data-series is used. All other ```label*``` options are discarded. 
 
 ## API
 

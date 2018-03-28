@@ -1,7 +1,7 @@
 /**
  * @summary     Draw Gauge
  * @description Creates Gauge chart
- * @version     1.2
+ * @version     1.3
  * @file        sico.draw.gauge.js
  * @dependencie jQuery
  * @author      Silver Connection OHG
@@ -32,12 +32,16 @@ namespace sico.draw {
         deg: number;
         data?: IGaugeData[];
         lineCap?: "butt" | "round" | "square";
+        labelInverse?: boolean;
+        labelHtml?: boolean;
+        labelCssBase?: string;
         offset?: number;
     }
 
     export interface IGaugeData {
         value: number;
         label?: string | LabelFunction;
+        labelCss?: string;
         labelColor?: string;
         labelFont?: string;
         labelSize?: number;
@@ -60,6 +64,7 @@ namespace sico.draw {
 
         public options: IGaugeConfig;
         public el: HTMLElement;
+        public elLabels: JQuery<HTMLElement>;
         public canvas: HTMLCanvasElement;
         public context: CanvasRenderingContext2D;
 
@@ -75,6 +80,9 @@ namespace sico.draw {
                 data: null,
                 deg: 180,
                 lineCap: "butt",
+                labelInverse: false,
+                labelHtml: false,
+                labelCssBase: undefined,
                 offset: 180,
             };
 
@@ -82,6 +90,7 @@ namespace sico.draw {
             {
                 color: "#0382A0",
                 label: undefined,
+                labelCss: undefined,
                 labelColor: "#727272",
                 labelFont: "sans-serif",
                 labelShow: true,
@@ -114,20 +123,47 @@ namespace sico.draw {
             // Configs
             this.options = $.extend(true, this.default, opt);
             this.checkData();
+            let flexX = "center";
             if (this.options.centerX === "left") {
                 this.centerXFactor = 0;
+                flexX = "flex-start";
             } else if (this.options.centerX === "right") {
                 this.centerXFactor = 1;
+                flexX = "flex-end";
             } else {
                 this.centerXFactor = 0.5;
             }
 
+            let flexY = "center";
             if (this.options.centerY === "top") {
                 this.centerYFactor = 0;
+                flexY = "flex-start";
             } else if (this.options.centerY === "bottom") {
                 this.centerYFactor = 1;
+                flexY = "flex-end";
             } else {
                 this.centerYFactor = 0.5;
+            }
+
+            // HTML Labels
+            if (this.options.labelHtml) {
+
+                this.elLabels = $("<div></div)");
+                this.elLabels.css({
+                    "position": "absolute",
+                    "top": 0,
+                    "left": 0,
+                    "height": this.options.canvasHeight,
+                    "width": this.options.canvasWidth,
+                    "display": "flex",
+                    "flex-direction": "column",
+                    "justify-content": flexY,
+                    "align-items": flexX,
+                });
+
+                $(this.el).css({
+                    "position": "relative",
+                }).append(this.elLabels);
             }
 
             // Create and draw Canvas
@@ -172,14 +208,21 @@ namespace sico.draw {
                 && this.options.data != null
                 && this.options.data.length > 0) {
                 let offsetLine = 0;
-                let offsetText = 1;
+                let offsetText = this.options.labelHtml ? 0 : 1;
                 for (const data of this.options.data) {
                     this.drawGauge(data, offsetLine);
                     offsetLine += data.size;
+                }
 
+                const ll = this.options.labelInverse ? this.options.data.reverse() : this.options.data;
+                for (const data of ll) {
                     if (data.labelShow) {
-                        this.drawText(data, offsetText);
-                        offsetText += data.labelSize + 10;
+                        if (!this.options.labelHtml) {
+                            this.drawText(data, offsetText);
+                            offsetText += data.labelSize + 10;
+                        } else {
+                            this.htmlText(data);
+                        }
                     }
                 }
             }
@@ -235,6 +278,22 @@ namespace sico.draw {
 
             this.context.fillStyle = data.labelColor;
             this.context.fillText(label, center.x, y);
+        }
+
+        public htmlText(data: IGaugeData) {
+            let label = "";
+            if (typeof data.label === "function") {
+                label = data.label(data.value);
+            } else {
+                label = data.label;
+            }
+
+            let css = this.options.labelCssBase || "";
+            if (data.labelCss) {
+                css += " " + data.labelCss; 
+            }
+
+            this.elLabels.append('<span class="' + css + '">' + label + "</span>");
         }
 
         private getCenterPoint() {

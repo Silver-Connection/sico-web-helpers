@@ -1,7 +1,7 @@
 /**
  * @summary     Draw Gauge
  * @description Creates Gauge chart
- * @version     1.2
+ * @version     1.3
  * @file        sico.draw.gauge.js
  * @dependencie jQuery
  * @author      Silver Connection OHG
@@ -35,11 +35,15 @@ var sico;
                     data: null,
                     deg: 180,
                     lineCap: "butt",
+                    labelInverse: false,
+                    labelHtml: false,
+                    labelCssBase: undefined,
                     offset: 180,
                 };
                 this.defaultData = {
                     color: "#0382A0",
                     label: undefined,
+                    labelCss: undefined,
                     labelColor: "#727272",
                     labelFont: "sans-serif",
                     labelShow: true,
@@ -67,23 +71,47 @@ var sico;
                 // Configs
                 this.options = $.extend(true, this.default, opt);
                 this.checkData();
+                var flexX = "center";
                 if (this.options.centerX === "left") {
                     this.centerXFactor = 0;
+                    flexX = "flex-start";
                 }
                 else if (this.options.centerX === "right") {
                     this.centerXFactor = 1;
+                    flexX = "flex-end";
                 }
                 else {
                     this.centerXFactor = 0.5;
                 }
+                var flexY = "center";
                 if (this.options.centerY === "top") {
                     this.centerYFactor = 0;
+                    flexY = "flex-start";
                 }
                 else if (this.options.centerY === "bottom") {
                     this.centerYFactor = 1;
+                    flexY = "flex-end";
                 }
                 else {
                     this.centerYFactor = 0.5;
+                }
+                // HTML Labels
+                if (this.options.labelHtml) {
+                    this.elLabels = $("<div></div)");
+                    this.elLabels.css({
+                        "position": "absolute",
+                        "top": 0,
+                        "left": 0,
+                        "height": this.options.canvasHeight,
+                        "width": this.options.canvasWidth,
+                        "display": "flex",
+                        "flex-direction": "column",
+                        "justify-content": flexY,
+                        "align-items": flexX,
+                    });
+                    $(this.el).css({
+                        "position": "relative",
+                    }).append(this.elLabels);
                 }
                 // Create and draw Canvas
                 this.createCanvas();
@@ -126,14 +154,23 @@ var sico;
                     && this.options.data != null
                     && this.options.data.length > 0) {
                     var offsetLine = 0;
-                    var offsetText = 1;
+                    var offsetText = this.options.labelHtml ? 0 : 1;
                     for (var _i = 0, _a = this.options.data; _i < _a.length; _i++) {
                         var data = _a[_i];
                         this.drawGauge(data, offsetLine);
                         offsetLine += data.size;
+                    }
+                    var ll = this.options.labelInverse ? this.options.data.reverse() : this.options.data;
+                    for (var _b = 0, ll_1 = ll; _b < ll_1.length; _b++) {
+                        var data = ll_1[_b];
                         if (data.labelShow) {
-                            this.drawText(data, offsetText);
-                            offsetText += data.labelSize + 10;
+                            if (!this.options.labelHtml) {
+                                this.drawText(data, offsetText);
+                                offsetText += data.labelSize + 10;
+                            }
+                            else {
+                                this.htmlText(data);
+                            }
                         }
                     }
                 }
@@ -184,6 +221,20 @@ var sico;
                 }
                 this.context.fillStyle = data.labelColor;
                 this.context.fillText(label, center.x, y);
+            };
+            Gauge.prototype.htmlText = function (data) {
+                var label = "";
+                if (typeof data.label === "function") {
+                    label = data.label(data.value);
+                }
+                else {
+                    label = data.label;
+                }
+                var css = this.options.labelCssBase || "";
+                if (data.labelCss) {
+                    css += " " + data.labelCss;
+                }
+                this.elLabels.append('<span class="' + css + '">' + label + "</span>");
             };
             Gauge.prototype.getCenterPoint = function () {
                 return {
