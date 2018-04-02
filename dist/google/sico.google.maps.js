@@ -22,6 +22,7 @@ var sico;
                     element: document.getElementById("gmap_canvas"),
                     location: new google.maps.LatLng(0, 0),
                     map: {
+                        zoom: 15,
                         mapTypeId: google.maps.MapTypeId.ROADMAP,
                     },
                     marker: null,
@@ -32,16 +33,10 @@ var sico;
                 this.info = null;
                 this.location = null;
                 // Set defaults
-                if (typeof jQuery === "undefined") {
-                    // Use underscore
-                    _.defaults(this.default, opt);
+                if (typeof jQuery !== "undefined") {
+                    this.options = $.extend(true, {}, this.default, opt);
                 }
-                else {
-                    $.extend(true, this.default, opt);
-                }
-                this.options = opt;
-                // Add location
-                this.options.map.center = this.options.location;
+                this.options.map["center"] = this.options.location;
             }
             /**
              * Add a marker to the map. This is invoked by the "draw()" methode if the marker configuartion is set.

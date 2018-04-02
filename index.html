@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
 
     <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="node_modules/datatables.net/js/jquery.dataTables.js"></script>
@@ -44,10 +45,34 @@
     <script type="text/javascript" src="src/dropzone/sico.dropzone.js"></script>
     <script type="text/javascript" src="src/samples/dropzone.js"></script>
 
-    <!-- Draw -->
-    <script type="text/javascript" src="src/draw/sico.draw.gauge.js"></script>
-    <script type="text/javascript" src="src/samples/draw.js"></script>
-    <script type="text/javascript" src="src/samples/draw-html.js"></script>
+    <!-- Google Mpas -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAQn-IFAkoT_fZRQTvjvO4HwSIwYnT4V0E"></script>
+    <script type="text/javascript" src="src/google/sico.google.maps.js"></script>
+    <script type="text/javascript" src="src/google/sico.google.maps.overlay.js"></script>
+    <script type="text/javascript" src="src/samples/maps.js"></script>
+    <style>
+        .map-icon-label .map-icon {
+            font-size: 24px;
+            color: #FFFFFF;
+            line-height: 48px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .map-icon {
+            font-family: 'map-icons';
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1;
+
+            /* Better Font Rendering =========== */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
 
     <title>Samples</title>
 </head>
@@ -55,26 +80,25 @@
 <body>
     <nav class="navbar fixed-top navbar-expand-md navbar-light bg-light">
         <a class="navbar-brand" href="#">Samples</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <nav class="nav navbar-nav mr-auto">
-                <a class="nav-item nav-link active" data-toggle="tab" href="#tab-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#tab-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
                 <a class="nav-item nav-link" data-toggle="tab" href="#tab-table" role="tab" aria-controls="nav-profile" aria-selected="false">DataTables</a>
                 <a class="nav-item nav-link" data-toggle="tab" href="#tab-dropzone" role="tab" aria-controls="nav-contact" aria-selected="false">Dropzone.js</a>
-                <a class="nav-item nav-link" data-toggle="tab" href="#tab-maps" role="tab" aria-controls="nav-contact" aria-selected="false">Google Mpas</a>
-                <a class="nav-item nav-link" data-toggle="tab" href="#tab-transaction" role="tab" aria-controls="nav-contact" aria-selected="false">Transaction</a>
-                <a class="nav-item nav-link" data-toggle="tab" href="#tab-vue" role="tab" aria-controls="nav-contact" aria-selected="false">Vue</a>
-                <a class="nav-item nav-link" data-toggle="tab" href="#tab-gauge" role="tab" aria-controls="nav-contact" aria-selected="false">Gauge</a>
-                <a class="nav-item nav-link" data-toggle="tab" href="#tab-gauge-html" role="tab" aria-controls="nav-contact" aria-selected="false">Gauge-Html</a>
+                <a class="nav-item nav-link active" data-toggle="tab" href="#tab-maps" role="tab" aria-controls="nav-contact" aria-selected="false">Google Mpas</a>
+                <!-- <a class="nav-item nav-link" data-toggle="tab" href="#tab-transaction" role="tab" aria-controls="nav-contact" aria-selected="false">Transaction</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#tab-vue" role="tab" aria-controls="nav-contact" aria-selected="false">Vue</a> -->
             </nav>
         </div>
     </nav>
     <div class="container-fluid" style="margin-top: 70px;">
         <div class="tab-content">
-            <div class="tab-pane fade show active" id="tab-home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="tab-pane fade" id="tab-home" role="tabpanel" aria-labelledby="home-tab">
                 <div class="jumbotron jumbotron-fluid">
                     <div class="container">
                         <h1 class="display-3">Samples & Code</h1>
@@ -115,7 +139,8 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <a class="btn btn-outline-success edit pull-right" href="javascript: sico.DropzoneHelper.$uploadShow('#dropzoneImageEdit');" id="btn-add-image">
+                        <a class="btn btn-outline-success edit pull-right" href="javascript: sico.DropzoneHelper.$uploadShow('#dropzoneImageEdit');"
+                            id="btn-add-image">
                             <i class="fa fa-plus"></i> Add Image
                         </a>
                     </div>
@@ -199,12 +224,24 @@
                     </div>
                 </div>
             </div>
+            <div class="tab-pane fade show active" id="tab-maps" role="tabpanel" aria-labelledby="maps-tab">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>Google-Maps</h1>
+                        <div style="overflow:hidden;">
+                            <div id="gmap_canvas" style="height:600px;width:100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="tab-pane fade" id="tab-transaction" role="tabpanel" aria-labelledby="transaction-tab">
                 <div class="row">
                     <div class="col-12">
                         <h1>Transaction Model</h1>
                         <p class="mt-4">
-                            The <i>Transaction</i> class is a set of tools for dealing with server response which match the <i>TransactionModel</i> interface.
+                            The
+                            <i>Transaction</i> class is a set of tools for dealing with server response which match the
+                            <i>TransactionModel</i> interface.
                         </p>
                         <p>
                             The actual data is wrapped which make life with Vue.js better, because we can update our data as we like.
@@ -254,54 +291,6 @@ interface TransactionModel {
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="tab-gauge" role="tabpanel" aria-labelledby="dropzone-tab">
-                <div class="row">
-                    <div class="col-4">
-                        <div id="gauge1"></div>
-                    </div>
-                    <div class="col-4">
-                        <div id="gauge2"></div>
-                    </div>
-                    <div class="col-4">
-                        <div id="gauge3"></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4">
-                        <div id="gauge4"></div>
-                    </div>
-                    <div class="col-4">
-                        <div id="gauge5"></div>
-                    </div>
-                    <div class="col-4">
-                        <div id="gauge6"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="tab-gauge-html" role="tabpanel" aria-labelledby="dropzone-tab">
-                <div class="row">
-                    <div class="col-4">
-                        <div id="gaugeHtml1"></div>
-                    </div>
-                    <div class="col-4">
-                        <div id="gaugeHtml2"></div>
-                    </div>
-                    <div class="col-4">
-                        <div id="gaugeHtml3"></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4">
-                        <div id="gaugeHtml4"></div>
-                    </div>
-                    <div class="col-4">
-                        <div id="gaugeHtml5"></div>
-                    </div>
-                    <div class="col-4">
-                        <div id="gaugeHtml6"></div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -320,7 +309,7 @@ interface TransactionModel {
 
     <script type="text/javascript">
         //<![CDATA[
-        $(document).ready(function() {
+        $(document).ready(function () {
             //testDataTableRaw("#dt-test")
             testDataTableHelper("#dt-test");
         });
@@ -337,7 +326,7 @@ interface TransactionModel {
                         content += " */<br/>";
                         hasDefault = true;
                     }
-                    content += property + "?: " + typeof(property) + "; <br/>";
+                    content += property + "?: " + typeof (property) + "; <br/>";
                     if (hasDefault) {
                         content += "<br/>";
                     }

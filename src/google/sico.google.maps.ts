@@ -79,17 +79,18 @@ namespace sico.maps {
   export class Map {
     protected options: IMapOptions = null;
     protected default: IMapOptions =
-    {
-      direction: null,
-      element: document.getElementById("gmap_canvas"),
-      location: new google.maps.LatLng(0, 0),
-      map: {
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-      },
-      marker: null,
-      title: "<strong>Name</strong><br/>Street No. 123",
-      titleShow: true,
-    };
+      {
+        direction: null,
+        element: document.getElementById("gmap_canvas"),
+        location: new google.maps.LatLng(0, 0),
+        map: {
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+        },
+        marker: null,
+        title: "<strong>Name</strong><br/>Street No. 123",
+        titleShow: true,
+      };
 
     protected map: google.maps.Map = null;
     protected info: google.maps.InfoWindow = null;
@@ -102,17 +103,11 @@ namespace sico.maps {
      */
     public constructor(opt: IMapOptions) {
       // Set defaults
-      if (typeof jQuery === "undefined") {
-        // Use underscore
-        _.defaults(this.default, opt);
-      } else {
-        $.extend(true, this.default, opt);
+      if (typeof jQuery !== "undefined") {
+        this.options = $.extend(true, {}, this.default, opt);
       }
 
-      this.options = opt;
-
-      // Add location
-      this.options.map.center = this.options.location;
+      this.options.map["center"] = this.options.location;
     }
 
     /**
